@@ -1,0 +1,32 @@
+{
+  "routes": [
+    {
+      "id": "1",
+      "productCategory": "Aluminum/Steel",
+      "origin": "Vietnam",
+      "destination": "Germany",
+      "transportMode": "Sea Freight",
+      "weightTons": 5,
+      "distanceKm": 18000,
+      "emissionsKg": 1350,
+      "euCarbonPriceEUR": 85,
+      "estimatedTariffEUR": 114.75,
+      "image": "https://images.unsplash.com/photo-1494412651409-8963ce7935a7",
+      "description": "Standard sea freight route from Ho Chi Minh City port to Hamburg. Slow but highly carbon efficient."
+    },
+    {
+      "id": "2",
+      "productCategory": "Electronics",
+      "origin": "Taiwan",
+      "destination": "France",
+      "transportMode": "Air Freight",
+      "weightTons": 2,
+      "distanceKm": 9800,
+      "emissionsKg": 9800,
+      "euCarbonPriceEUR": 85,
+      "estimatedTariffEUR": 833.00,
+      "image": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05",
+      "description": "Expedited air freight from Taipei to Paris. Extremely fast but incurs a massive carbon penalty."
+    }
+  ]
+}
