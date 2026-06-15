@@ -71,29 +71,155 @@ main {
   margin: 30px auto;
 }
 
-/* HOME PAGE STYLES */
+/* --- HOME PAGE SECTIONS --- */
+
+/* Centers everything and removes the top margin we had previously */
 .home-container {
-  /* Center the text inside the home container */
   text-align: center;
+}
+
+/* Base style for all sections to ensure they take up screen space and are scrollable */
+section {
+  /* Ensure each section takes up at least 70% of the screen height : vh == viewport height */
+  min-height: 70vh;
+  /* Use flexbox to display children side by side(default) */
+  display: flex;
+  /* display children : one below other */
+  flex-direction: column;
+  /* center children on MAIN AXIS(here y axis) */
+  justify-content: center;
+  /* center children on CROSS AXIS(here x-axis)*/
+  align-items: center;
+  /* Add padding so content doesn't touch the edges */
+  padding: 40px 20px;
+}
+
+/* HERO SECTION */
+.hero-section {
   /* Push it down slightly from the navbar */
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
-.home-container h1 {
-  /* Space below the title */
-  margin-bottom: 20px;
-  /* Dark slate color */
+.hero-section h1 {
+  /* Make the main title massive */
+  font-size: 3rem;
   color: #0f172a;
+  margin-bottom: 20px;
 }
 
-.home-container p {
-  /* Increase line height for better readability */
+.subtitle {
+  font-size: 1.2rem;
+  color: #475569;
+  max-width: 600px;
   line-height: 1.6;
-  /* Make the font slightly larger, 1rem = 16px */
+  margin-bottom: 40px;
+}
+
+/* The Call to Action Button */
+.cta-button {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
   font-size: 1.1rem;
-  /* Slightly lighter grey for secondary text */
+  font-weight: bold;
+  transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); 
+  
+  /* NEW ADDITIONS FOR <button> TAGS: */
+  border: none; /* Removes the ugly default browser border */
+  cursor: pointer; /* Turns the mouse into a pointing hand when hovering */
+  font-family: inherit; /* Ensures the button uses our global Arial font */
+}
+
+.cta-button:hover {
+  /* on hover, move button up by 3 px */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6);
+}
+
+/* INFO SECTION (The Explanation) */
+.info-section {
+  /* Give this section a subtle white background to separate it from the others */
+  background: white;
+  border-radius: 20px;
+  /* Box shadow for depth */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  margin: 40px 0;
+}
+
+.info-section h2 {
+  font-size: 2.2rem;
+  color: #0f172a;
+  margin-bottom: 25px;
+}
+
+.info-content {
+  max-width: 800px;
+  text-align: left;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #334155;
+}
+
+.info-content p {
+  margin-bottom: 15px;
+}
+
+/* STATS / GEOPOLITICS SECTION */
+.stats-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+}
+
+.stats-grid {
+  /* Create a 3-column grid for our data cards */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 40px;
+}
+
+.stat-card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  /* Make the cards flex columns so text aligns nicely */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stat-card h3 {
+  color: #2563eb;
+  margin-bottom: 15px;
+}
+
+.stat-card ul {
+  /* Remove default bullet points */
+  list-style: none;
+  padding: 0;
+}
+
+.stat-card li {
+  margin-bottom: 10px;
+  font-weight: 500;
   color: #475569;
 }
+
+.massive-number {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #e11d48;
+  margin-bottom: 10px;
+}
+
+
+
+
 
 
 /* HEADERS of 'RouteCard' , 'Shipment', 'ShipmentDetails' components */

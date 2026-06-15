@@ -75,4 +75,7 @@ An Application built to help e-commerce businesses to calculate supply chain emi
     // useParams() to extract dynamic parameter : id for dynamic routing to specific pages/components
       const { id } = useParams();
     ```
+    ### Phase 1.5 : Landing/Home Page Modification
+    - Added 3 sections to Home page, using `Semantic Tags`.
+    - used action `scrollIntoView` on Call To Action(CTA) button `onClick` event.
     
