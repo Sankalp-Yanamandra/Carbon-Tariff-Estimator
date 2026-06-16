@@ -17,11 +17,21 @@ An Application built to help e-commerce businesses to calculate supply chain emi
 - [What is a Carbon Border Adjustment Mechanism? (Brookings)](https://www.brookings.edu/articles/what-is-a-carbon-border-adjustment-mechanism/)
 </details>
 
+<!-- Global Tech stack used -->
+## 🛠️ Tools Used : 
+- React-js 
+- Vite
+- React-Router
+- Axios Library
+- JSON-server
+- JSX
+- JS-ES6+
+- CSS (flex, grid).
+
 
 <!-- Phase 1-->
 ## Phase 1 : Project, React Router, JSON-server, Axios instance setup & Data Fetching from JSON-server and rendered the data.
-- 🛠️ Tools Used : 
-    - React-js, Vite, React-Router, Axios Library, JSON-server, JSX, JS-ES6+, CSS (flex, grid).
+
 - 🔍 Concepts Used :
     - psuedo-backend REST-API setup using JSON-server.
         ran backend using:
@@ -79,3 +89,49 @@ An Application built to help e-commerce businesses to calculate supply chain emi
     - Added 3 sections to Home page, using `Semantic Tags`.
     - used action `scrollIntoView` on Call To Action(CTA) button `onClick` event.
     
+## Phase 2 : Working with forms, State management & CRUD(Create,Read,Delete,Update) Operations.
+
+- 🔍 Concepts Used : 
+    - created n used Controlled Form Components using `useState()` hook and `...data` : `spread operator`
+    ```javascript
+    // state to hold data typed by user
+    const [formData, setFormData] = useState({
+        // initialize formData
+    });
+
+   setFormData({
+        // Keep all existing data : spread operator for DEEP COPY
+      ...formData, 
+      // Update only the field that was changed
+      [event.target.name]: event.target.value 
+    });
+    ```
+    - Events used : `onClick`, `onSubmit`, `onChange`
+    - `useNavigate` hook for navigation controlled by code not user. 
+    ```javascript
+    // destructure for using useNavigate() hook
+    const navigate = useNavigate();
+    // as soon as POST request sent automatically navigate back to Shipments page
+    navigate("/shipments");
+    ```
+    - To prevent automatic Form reload `onSubmit`
+    ```javascript
+        event.preventDefault(); 
+    ```
+    - used and applied CRUD Lifestyle : 
+        - `C`reate via `POST` request
+        - `R`ead via `GET` request
+        - `U`pdate via `PUT` request
+        - `D`elete via `DELETE` request
+    - optimized UI re-rendering using `array.filter()` in place of expensive `server re-fetch`.
+    - Built UX "Escape Latches" to allow users to exit forms easily using `<Link>`.
+    - Used simple `Geopoltical Emission & Tariff Algorithms` to calculate the `tariff`.
+### Phase Issue 2.1 : Handling `<img>` failing to render image.
+- 2 layered fallback strategy :
+    - Strategy 1 :
+        - `onError` Event inside `<img>` that defines action if image fails to load, where `src` attribute swaps image with more reliable default image.
+    - Strategy 2 :
+        - in CSS, modified image containers with :
+            1. fixed dimension
+            2. block display (all contents must start with new line, since each content must occupy all space  irrespective of the given space it actually uses.)
+            3. neutral background color : acts as skeleton loader.
