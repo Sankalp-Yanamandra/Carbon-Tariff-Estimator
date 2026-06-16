@@ -1,11 +1,27 @@
 import { Link } from "react-router-dom";
 
+
 // The 'route' prop is passed down from the parent Shipments page, destructured i.e. (here) rather than props.route.something
 // use just route.something
-function RouteCard({ route }) {
+function RouteCard({ route, onDelete }) {
+
+  // Reliable sea freight image
+  const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1494412651409-8963ce7935a7"; 
+
+
+
   return (
     <div className="card">
-      <img src={route.image} alt={`${route.origin} to ${route.destination}`} />
+      <img 
+        src={route.image || DEFAULT_IMAGE} 
+        alt={`${route.origin} to ${route.destination}`} 
+        onError={(e) => {
+          // Swap to default if broken
+          e.target.src = DEFAULT_IMAGE; 
+          // Prevent infinite loop if default also breaks
+          e.target.onerror = null; 
+        }}
+      />
       
       <h3>{route.origin} → {route.destination}</h3>
       <p className="category">{route.productCategory}</p>
@@ -15,11 +31,17 @@ function RouteCard({ route }) {
         <p>☁️ CO2: {route.emissionsKg} kg</p>
         <p>💶 Tariff: €{route.estimatedTariffEUR}</p>
       </div>
+
+      <div className="card-actions">
         {/*
-            Dynamic routing using dynamic id parameter,
-            on clicking this link, render 'ShipmentDetails' component 
-         */}
-      <Link to={`/shipments/${route.id}`}>View Analysis</Link>
+        Dynamic routing using dynamic id parameter,
+        on clicking this link BY USER, render 'ShipmentDetails' component 
+        */}
+        <Link className="view-btn" to={`/shipments/${route.id}`}>View Route Details</Link>
+        <Link className="edit-btn" to={`/edit-shipment/${route.id}`}>Edit Route Details</Link>
+        {/* We use an arrow function so onDelete doesn't trigger automatically on load */}
+        <button className="delete-btn" onClick={() => onDelete(route.id, route.transportMode, route.origin, route.destination)}>Delete Route</button>
+      </div>
     </div>
   );
 }

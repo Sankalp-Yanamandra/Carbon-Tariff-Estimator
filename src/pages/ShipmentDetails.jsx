@@ -2,7 +2,11 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
+import { Link } from "react-router-dom";
+
 function ShipmentDetails() {
+
+
   // Grab the dynamic ID from the URL (e.g., /shipments/1) using useParams()
   const { id } = useParams();
   // state that stores details of each route
@@ -29,10 +33,30 @@ function ShipmentDetails() {
     return <h2>Calculating Emissions...</h2>;
   }
 
+  //handling image loading issue
+  const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1494412651409-8963ce7935a7"; // Reliable sea freight image 
+
+
 //   render data stored inside state 'route'
   return (
     <div className="details">
-      <img src={route.image} alt="Trade Route" />
+
+      {/* escape latch to return to dashboard */}
+      <Link to="/shipments" className="back-link">
+        ← Back to Dashboard
+      </Link>
+
+
+      <img 
+        src={route.image || DEFAULT_IMAGE} 
+        alt="Trade Route" 
+        onError={(e) => {
+          // Swap to default if broken
+          e.target.src = DEFAULT_IMAGE;
+          // Prevent infinite loop if default also breaks
+          e.target.onerror = null;
+        }}
+      />
       
       <h1>{route.origin} to {route.destination} Analysis</h1>
       <p>{route.description}</p>

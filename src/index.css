@@ -273,6 +273,10 @@ THE GRID FOR OUR CARDS */
   /* Ensures the image fills the 200px box without stretching */
   object-fit: cover;
   transition: 0.4s;
+
+  display: block; 
+  background-color: #e2e8f0; /* Light slate gray placeholder */
+  color: transparent; /* Hides the ugly default "broken image" alt text */
 }
 
 .card:hover img {
@@ -299,26 +303,7 @@ THE GRID FOR OUR CARDS */
   line-height: 1.5;
 }
 
-.card > a {
-  /* Make the link behave like a block element (a button) */
-  display: block;
-  margin: 15px;
-  padding: 12px;
-  text-align: center;
-  /* Green/Teal gradient to imply "eco-friendly" or "money/tariffs" */
-  background: linear-gradient(135deg, #059669, #10b981);
-  color: white;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: 0.3s;
-}
 
-.card > a:hover {
-  /* Slightly enlarge the button on hover */
-  transform: scale(1.03);
-  /* Add a green shadow */
-  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
-}
 
 /* SHIPMENT DETAILS PAGE STYLES
   'ShipmentDetails' component
@@ -336,6 +321,11 @@ THE GRID FOR OUR CARDS */
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 25px;
+
+
+  display: block;
+  background-color: #e2e8f0;
+  color: transparent;
 }
 
 .details-grid {
@@ -377,4 +367,194 @@ THE GRID FOR OUR CARDS */
 .highlight {
   font-size: 1.3rem;
   color: #be123c;
+}
+
+
+/* DASHBOARD HEADER */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+/* ADD BUTTON STYLES */
+.add-btn {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
+.add-btn:hover {
+  /* move up by 3px on hovering */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+/* FORM CONTAINER */
+.form-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: white;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #0f172a;
+}
+
+/* SHARED INPUT & SELECT STYLES */
+.form-container input,
+.form-container select {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
+  /* Light grey border */
+  border: 2px solid #e2e8f0; 
+  border-radius: 10px;
+  font-size: 16px;
+  /* Removes default browser highlighting */
+  outline: none; 
+  /* Smooth transition when clicking into the box */
+  transition: 0.3s; 
+}
+
+/* WHEN THE USER CLICKS INTO AN INPUT */
+.form-container input:focus,
+.form-container select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.15);
+}
+
+/* THE SUBMIT BUTTON */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #059669, #10b981); 
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  /* cursor on hovering : arrow -> pointer */
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  /* move up by 3px */
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.25);
+} 
+
+/* CARD ACTIONS CONTAINER */
+.card-actions {
+  /* Aligns the buttons in a row */
+  display: flex;
+  /* Adds space between the buttons */
+  gap: 10px;
+  /* Padding inside the bottom of the card */
+  padding: 15px;
+}
+
+/* BASE STYLES FOR ALL 3 BUTTONS */
+.view-btn,
+.edit-btn,
+.delete-btn {
+  /* flex: 1 makes all buttons take up equal width */
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+/* SPECIFIC BUTTON COLORS */
+.view-btn {
+  /* Blue gradient */
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+}
+
+.edit-btn {
+  /* Green gradient */
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+.delete-btn {
+  /* Red gradient */
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+/* HOVER EFFECTS FOR ALL 3 BUTTONS */
+.view-btn:hover,
+.edit-btn:hover,
+.delete-btn:hover {
+  /* Lift them slightly */
+  transform: translateY(-2px);
+  /* Make them slightly transparent */
+  opacity: 0.9; 
+}
+
+
+/* FORM ACTIONS CONTAINER (Holds Submit and Cancel side-by-side) */
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* Make sure the submit button takes up more space than the cancel button */
+.submit-btn {
+  flex: 2; 
+  margin-top: 0; /* Resetting the margin we added previously */
+}
+
+/* CANCEL BUTTON STYLES */
+.cancel-btn {
+  flex: 1; /* Takes up 1 part of the available space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Neutral grey color so it doesn't compete with the primary green button */
+  background: #e2e8f0; 
+  color: #475569;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.cancel-btn:hover {
+  background: #cbd5e1;
+  color: #1e293b;
+}
+
+/* BACK LINK IN Shipment DETAILS PAGE */
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #2563eb;
+  font-weight: bold;
+  font-size: 1.05rem;
+  transition: 0.3s;
+}
+
+.back-link:hover {
+  color: #1d4ed8;
+  /* Smoothly slide the arrow a few pixels to the left when hovered! */
+  transform: translateX(-5px); 
 }
