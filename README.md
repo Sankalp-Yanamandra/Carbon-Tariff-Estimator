@@ -159,5 +159,19 @@ An Application built to help e-commerce businesses to calculate supply chain emi
         ```
     - dynamic Navbar UI rendering based on Login status:
         - before login:
-        
+            <img src="src/assets/beforelogin.png" alt="Screenshot1" width="1000">
+        - after login : 
+            <img src="src/assets/afterlogin.png" alt="Screenshot2" width="1000">
+    - developed a  `ProtectedRoute` that acts as a `Bouncer` to prevent unauthorized access to `Add/Edit-route` features.
+    - `UI Access Control` : conditionally render (&& operator) `Edit` and `Delete` and `Draft-Route` features to only allows, logged in users to available these features.
+    - used <Navigate> automatic redirect while rendering inside   
+    `ProtectedRoute`
+    ```javascript
+        return <Navigate to="/login" replace />;
+        // without replace : on clicking go back (<) button, takes you back to ProtectedPage (not preferred)
+        // protectedpage <=> login (no replace)
+        //with replace : on clicking go back (<) button, skips going back.
+        // protectedpage -> login (with replace, no going back)
+    ```
+
     
