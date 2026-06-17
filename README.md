@@ -169,8 +169,8 @@ An Application built to help e-commerce businesses to calculate supply chain emi
             <img src="src/assets/afterlogin.png" alt="Screenshot2" width="1000">
     - developed a  `ProtectedRoute` that acts as a `Bouncer` to prevent unauthorized access to `Add/Edit-route` features.
     - `UI Access Control` : conditionally render (&& operator) `Edit` and `Delete` and `Draft-Route` features to only allows, logged in users to avail these features.
-    - used <Navigate> automatic redirect while rendering inside   
-    `ProtectedRoute`
+    - used <Navigate> automatic redirect while rendering inside  `ProtectedRoute`
+    
     ```javascript
         return <Navigate to="/login" replace />;
         // without replace : on clicking go back (<) button, takes you back to ProtectedPage (not preferred)
