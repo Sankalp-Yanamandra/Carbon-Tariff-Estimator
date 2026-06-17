@@ -26,7 +26,7 @@ function Login() {
         
 
         alert(`Logged In successfully. Welcome Back ${response.data[0].name} !!!`);
-        
+         
         navigate("/shipments");
         
         // Force a quick page reload so our Navbar updates to show the logged-in state(since login n shipment not related, so to
