@@ -135,3 +135,29 @@ An Application built to help e-commerce businesses to calculate supply chain emi
             1. fixed dimension
             2. block display (all contents must start with new line, since each content must occupy all space  irrespective of the given space it actually uses.)
             3. neutral background color : acts as skeleton loader.
+
+<!-- phase 3 -->
+## Phase 3 : User Authentication & ProtectedRoutes  
+- 🔍 Concepts Used :
+    - Added Register,Login forms (update against JSON server database), Logout option and a Delete Account option.
+        - also used LocalStorage:
+        ```javascript
+        // store credentials of user who has logged in to avoid logging out on Page Refresh, accidental closing of Tab/Browser.
+        // We have to use JSON.stringify because localStorage ONLY accepts strings :  js obj => json obj
+        localStorage.setItem("user", JSON.stringify(response.data[0]));
+
+        // Force a quick page reload so our Navbar updates to show the logged-in state(since login n shipment pages not related, so to
+        // reflect changes in localStorage which can be seen by  Shipments page)
+        window.location.reload();
+
+          
+        useEffect(() => {
+
+              // 1. Erase the user from the browser's memory
+            localStorage.removeItem("user");
+        }, [])
+        ```
+    - dynamic Navbar UI rendering based on Login status:
+        - before login:
+        
+    
