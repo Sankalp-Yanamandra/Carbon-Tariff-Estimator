@@ -156,6 +156,11 @@ An Application built to help e-commerce businesses to calculate supply chain emi
               // 1. Erase the user from the browser's memory
             localStorage.removeItem("user");
         }, [])
+
+          // Check if someone is logged in
+          // JSON.parse() : json obj  => usable js obj
+        const user = JSON.parse(localStorage.getItem("user"));
+
         ```
     - dynamic Navbar UI rendering based on Login status:
         - before login:
