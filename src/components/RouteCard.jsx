@@ -8,6 +8,8 @@ function RouteCard({ route, onDelete }) {
   // Reliable sea freight image
   const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1494412651409-8963ce7935a7"; 
 
+  // Check if someone is logged in
+  const user = JSON.parse(localStorage.getItem("user"));
 
 
   return (
@@ -37,10 +39,19 @@ function RouteCard({ route, onDelete }) {
         Dynamic routing using dynamic id parameter,
         on clicking this link BY USER, render 'ShipmentDetails' component 
         */}
+        {/* view feature available to all */}
         <Link className="view-btn" to={`/shipments/${route.id}`}>View Route Details</Link>
-        <Link className="edit-btn" to={`/edit-shipment/${route.id}`}>Edit Route Details</Link>
-        {/* We use an arrow function so onDelete doesn't trigger automatically on load */}
-        <button className="delete-btn" onClick={() => onDelete(route.id, route.transportMode, route.origin, route.destination)}>Delete Route</button>
+
+
+        {/* edit, delete feature only for logged in users : conditional rendering */}
+        {user && (
+          <>
+            <Link className="edit-btn" to={`/edit-shipment/${route.id}`}>Edit Route Details</Link>
+            <button className="delete-btn" onClick={() => onDelete(route.id, route.transportMode, route.origin, route.destination)}>
+              Delete Route
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

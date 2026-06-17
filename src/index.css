@@ -26,7 +26,7 @@ a {
 /* NAVBAR STYLES
   for flex-
   parent : nav
-  children : Links
+  children : nav-left, nav-right
 */
 nav {
   /* Dark, professional blue gradient */
@@ -41,12 +41,25 @@ nav {
   align-items: center;
   /* Add a subtle drop shadow below the navbar */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+
+  /* nav-left n nav-right on opp ends of navbar */
+  justify-content: space-between; 
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* NEW: Make sure the links inside the two groups sit side-by-side with gaps */
+.nav-left, 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
 }
 
 /*
-  children of nav (for flex) 
+  children of nav-left n nav-right (for flex) 
  */
-nav > a {
+nav > .nav-left > a, nav > .nav-right > a {
   /* Make the text white */
   color: white;
   /* Make the text slightly bolder */
@@ -557,4 +570,180 @@ THE GRID FOR OUR CARDS */
   color: #1d4ed8;
   /* Smoothly slide the arrow a few pixels to the left when hovered! */
   transform: translateX(-5px); 
+}
+
+
+/* --- AUTHENTICATION PAGES --- */
+
+/* Centers the card perfectly in the middle of the screen */
+.auth-container {
+  min-height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* The white box holding the form */
+.auth-card {
+  width: 100%;
+  max-width: 450px;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.auth-card h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #0f172a;
+  font-size: 1.8rem;
+}
+
+/* Reusing our nice input styles from the CRUD forms */
+.auth-card input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.auth-card input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.15);
+}
+
+/* Specific Auth Button to look corporate and secure */
+.auth-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1e293b, #0f172a); /* Dark slate/black */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.auth-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.3);
+}
+
+/* Footer text (the "Login Here" / "Register Here" links) */
+.auth-card p {
+  text-align: center;
+  margin-top: 20px;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.auth-card p a {
+  color: #2563eb;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.auth-card p a:hover {
+  text-decoration: underline;
+}
+
+
+/* logout and delete dropdown menu */
+/* --- AVATAR & DROPDOWN STYLES --- */
+
+.user-menu {
+  /* This is crucial! It allows the absolute dropdown to position itself relative to this container */
+  position: relative; 
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 25px;
+  transition: 0.3s;
+}
+
+.user-profile:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  /* 50% border-radius makes a perfect circle */
+  border-radius: 50%; 
+  /* A lighter blue to contrast with the dark navbar */
+  background: #3b82f6; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.username {
+  font-size: 1rem;
+}
+
+.dropdown {
+  /* Break out of the navbar flow to hover over the page */
+  position: absolute;
+  /* Align to the right side of the avatar */
+  right: 0; 
+  /* Push it slightly below the navbar */
+  top: 60px; 
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  /* Ensure it sits on top of all other page elements */
+  z-index: 100; 
+}
+
+.dropdown-item {
+  padding: 15px 20px;
+  color: #1e293b;
+  /* removes underline which is default for <Link> */
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f5f9;
+  font-family: inherit;
+  transition: 0.2s;
+}
+
+.dropdown-item:hover {
+  background: #f8fafc;
+  color: #2563eb;
+}
+
+/* Specific styling for the destructive action */
+.delete-text {
+  color: #ef4444; /* Red */
+}
+
+.delete-text:hover {
+  color: #dc2626;
+  background: #fef2f2; /* Very light red background on hover */
 }

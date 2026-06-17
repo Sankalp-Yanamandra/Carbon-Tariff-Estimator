@@ -8,6 +8,10 @@ function Shipments() {
   // states to store route data
   const [routes, setRoutes] = useState([]);
 
+  // check if any user logged in (only logged in users will be allowed to add-shipments)
+  const user = JSON.parse(localStorage.getItem("user"));
+
+
   // Fetch the data as soon as the page loads i.e. ONly Once
   useEffect(() => {
     getRoutes();
@@ -50,8 +54,13 @@ function Shipments() {
         
         <h1>Active Supply Chain Routes</h1>
 
-        {/* button that triggers navigation to AddShipment page  : USER has to click it so <Link>*/}
-        <Link to="/add-shipment" className="add-btn">+ Draft New Route</Link>
+        {/* only logged in users, will be allowed this feature */}
+        {user && (
+        <>
+          {/* button that triggers navigation to AddShipment page  :  USER has to click it so <Link>*/}
+          <Link to="/add-shipment" className="add-btn">+ Draft New Route</Link>
+        </>
+        )}
       </div>
 
 
