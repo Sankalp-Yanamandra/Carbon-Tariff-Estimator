@@ -22,7 +22,10 @@ An Application built to help e-commerce businesses to calculate supply chain emi
 - React-js 
 - Vite
 - React-Router
-- Axios Library
+- Redux Toolkit
+- React-Redux Library : connects React with Redux(toolkit)
+- Axios JavaScript Library : to call REST API from components.
+- REST API
 - JSON-server
 - JSX
 - JS-ES6+
@@ -179,4 +182,98 @@ An Application built to help e-commerce businesses to calculate supply chain emi
         // protectedpage -> login (with replace, no going back)
     ```
 
+## Phase 4 : Global State Management (Redux Toolkit)
+- create a central vault for states : `store` that eliminates the issue of `props drilling` using `Redux Toolkit`.
+```javascript
+export const store = configureStore({
+    // fn(s) to manipulate states globally
+  reducer: {
+    // We register our specific "department" (slice) in the store : watchlist (name must match the name defined in the slice)
+    favorites: favoritesReducer,
+  },
+})
+
+```
+- terminologies : 
+    1. `Slice` : dept/feature
+    2. `state`: dynamic variable whose change in value driggers react component re-render
+    3. `reducer` : fn to manipulate `state` globally(similar to react's `setState()`)
+    4. `action type`: which reducer fn called
+    5. `action payload` : data sent by user.
+    6. `store` : vault where all states exist and stored.
+
+- create `Slice` for `routes considered critical by the user`
+```javascript
+export const watchlistSlice = createSlice({
+    // this name would be used by useDispatch (send data to store): to update state value
+  name: "watchlist",
+  
+  // The initial state is just an empty array (no pinned routes yet)
+  initialState: [],
+  
+  // Reducers are the "Bank Tellers" - the functions that actually change the data (similar to setstate() in react)
+  reducers: {
     
+    // Action 1: Pinning a route to the watchlist
+    pinRoute: (state, action) => {
+      // 'action.payload' is the entire route object we click on to save (payload : data sent by user)
+      const newRoute = action.payload;
+
+      // Look through our current state to see if this EXACT route already exists (checking for duplicates) using find() : returns true/false
+      const exists = state.find((route) => route.id === newRoute.id);
+
+      // if not a duplicate, then save to the state   
+      if (!exists) {
+        // use .push() to safely add the item
+        state.push(newRoute); 
+      } else {
+        // If its duplicate don't save , alert the user 
+        alert("This specific route is already pinned to your Watchlist!");
+      }
+    },
+
+    // Action 2: Unpinning a route
+    unpinRoute: (state, action) => {
+      // 'action.payload' will be the ID of the route we want to remove
+      // filter() : to dynamically update the watchlist [] by ignoring routes we want to unpin
+      return state.filter((route) => {
+        return route.id !== action.payload
+      });
+    }
+```
+
+- connected `react` with `redux toolkit` using `react-redux` library, also used hooks provided by this library:
+    1. `useSelector()` hook : to get data from the `store`.
+    2. `useDispatch()` hook : to send data to the `store`.
+```javascript
+  // wrap entire App inside Provider(react-redux connects react with redux) : so the Store(global vault with various depts -Slices) 
+  // available[Read/Write access to Store's Slice's States] to all components
+  // inside the App.jsx
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
+
+  // 1. Initialize Redux dispatcher
+  const dispatch = useDispatch();
+
+  // 2. Read the current watchlist from the Redux Vault
+  const watchlist = useSelector((state) => state.watchlist);
+
+  // 3. Check if THIS specific route is already inside the watchlist
+  const isPinned = watchlist.some((item) => item.id === route.id);
+
+    function handlePin() {
+    // send complete route obj to store
+    dispatch(pinRoute(route));
+  }
+
+    function handleUnpin() {
+    // send to route id to store for unpinning
+    dispatch(unpinRoute(route.id));
+  }
+```
+- Implemented dynamic History Navigation (`useNavigate(-1)`) in `ShipmentDetails.jsx` to allow user to go back to immediately visited page(`Shipment.jsx` or `Watchlist.jsx`) to maintain user's flow.[in place of `<Link>` tag.]
+
+
