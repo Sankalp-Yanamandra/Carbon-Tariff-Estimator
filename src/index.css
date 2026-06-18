@@ -625,3 +625,75 @@ h1, h2, h3 {
   background-color: rgba(245, 158, 11, 0.15);
   border-color: rgba(245, 158, 11, 0.3);
 }
+
+/* --- CUSTOM REACT-CONFIRM-ALERT MODAL STYLES --- */
+
+/* 1. The Main Modal Box */
+.react-confirm-alert-body {
+  background-color: #18181b !important; /* Dark zinc to match your cards */
+  border: 1px solid #27272a !important;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.8) !important;
+  padding: 30px !important;
+  font-family: inherit !important;
+  width: 450px !important;
+  max-width: 90vw !important;
+}
+
+/* 2. The Title */
+.react-confirm-alert-body h1 {
+  color: #fafafa !important; /* Crisp, high-contrast white */
+  font-size: 1.5rem !important;
+  margin-bottom: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* 3. The Message */
+.react-confirm-alert-body p {
+  color: #a1a1aa !important; /* Muted grey so it doesn't compete with the title */
+  font-size: 1.05rem !important;
+  font-style: normal !important; 
+  margin-bottom: 25px !important;
+  line-height: 1.6 !important;
+}
+
+/* 4. The Button Container */
+.react-confirm-alert-button-group {
+  justify-content: flex-start !important;
+  gap: 15px !important;
+}
+
+/* Base style for both buttons inside the modal */
+.react-confirm-alert-button-group button {
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  padding: 10px 20px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+  font-family: inherit !important;
+}
+
+/* 5. The First Button (Usually "Yes, Delete It") */
+.react-confirm-alert-button-group button:nth-child(1) {
+  background-color: rgba(239, 68, 68, 0.1) !important; /* Translucent red */
+  color: #ef4444 !important; /* Danger red text */
+  border: 1px solid transparent !important;
+}
+
+.react-confirm-alert-button-group button:nth-child(1):hover {
+  background-color: rgba(239, 68, 68, 0.2) !important;
+}
+
+/* 6. The Second Button (Usually "Cancel") */
+.react-confirm-alert-button-group button:nth-child(2) {
+  background-color: transparent !important;
+  color: #a1a1aa !important;
+  border: 1px solid #27272a !important;
+}
+
+.react-confirm-alert-button-group button:nth-child(2):hover {
+  color: #fafafa !important;
+  border-color: #52525b !important;
+}
