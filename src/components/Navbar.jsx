@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import api from "../services/api";
 
+import { useSelector } from "react-redux";
+
 function Navbar() {
 
   const navigate = useNavigate();
@@ -15,6 +17,8 @@ function Navbar() {
   // State to track if the dropdown is open
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  // get watchlist data from the store
+  const watchlist = useSelector((state) => state.watchlist);
 
   // Function to handle deleting the account
   async function handleDeleteAccount() {
@@ -55,6 +59,15 @@ function Navbar() {
       <div className="nav-left">
         <Link to="/">Home</Link>
         <Link to="/shipments">Shipment Routes</Link>
+
+        {/* <Link> to navigate to `Watchlist` page when user clicks it, also shows no of items in the watchlist : only for logged in users */}
+        {user && (
+            <Link to="/watchlist" style={{ color: "#fbbf24" }}>
+              ⭐ Watchlist ({watchlist.length})
+            </Link>
+          )}
+
+
       </div>
 
       {/* right side of navbar */}

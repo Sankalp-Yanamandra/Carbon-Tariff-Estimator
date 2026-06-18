@@ -13,6 +13,9 @@ import Register from '../pages/Register';
 import Logout from '../pages/Logout';
 import ProtectedRoute from './ProtectedRoute';
 
+
+import Watchlist from '../pages/Watchlist';
+
 function AppRoutes() {
   return (
     <Routes>
@@ -20,7 +23,7 @@ function AppRoutes() {
       <Route path="/shipments" element={<Shipments />} />
       <Route path="/shipments/:id" element={<ShipmentDetails />} />
       
-      {/* Add, Edit features only available after logging in */}
+      {/* Add, Edit, Watchlist features only available after logging in */}
       <Route path="/add-shipment" element={
         <ProtectedRoute>
           <AddShipment />
@@ -32,6 +35,16 @@ function AppRoutes() {
           <EditShipment />
         </ProtectedRoute>
         }/>
+
+      <Route 
+        path="/watchlist" 
+        element={
+          <ProtectedRoute>
+            <Watchlist />
+          </ProtectedRoute>
+        } 
+      />
+
 
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />

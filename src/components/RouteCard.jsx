@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
+import { pinRoute, unpinRoute } from "../features/watchlistSlice";
+
 
 // The 'route' prop is passed down from the parent Shipments page, destructured i.e. (here) rather than props.route.something
 // use just route.something
@@ -10,6 +13,27 @@ function RouteCard({ route, onDelete }) {
 
   // Check if someone is logged in
   const user = JSON.parse(localStorage.getItem("user"));
+
+  // 1. Initialize Redux dispatcher
+  const dispatch = useDispatch();
+
+  // 2. Read the current watchlist from the Redux Vault
+  const watchlist = useSelector((state) => state.watchlist);
+
+  // 3. Check if THIS specific route is already inside the watchlist
+  const isPinned = watchlist.some((item) => item.id === route.id);
+
+  // 4. Function to handle pinning
+  function handlePin() {
+    // send complete route obj to store
+    dispatch(pinRoute(route));
+  }
+
+  // 5. Function to handle unpinning (so they can toggle it right from the dashboard!)
+  function handleUnpin() {
+    // send to route id to store for unpinning
+    dispatch(unpinRoute(route.id));
+  }
 
 
   return (
@@ -53,6 +77,24 @@ function RouteCard({ route, onDelete }) {
           </>
         )}
       </div>
+
+      {/* Watchlist Pin Button Only for logged-in users*/}
+      {user && (
+        <div style={{ padding: "0 15px 15px 15px" }}>
+          {/* if pinned: show pinned button, if clicked triggers fn to unpin */}
+          {isPinned ? (
+            <button className="pinned-btn" onClick={handleUnpin}>
+              📌 Pinned to Watchlist
+            </button>
+            // if unpinned, show pin button, if clicked triggeres fn to pin
+          ) : (
+            <button className="pin-btn" onClick={handlePin}>
+              ⭐ Pin to Watchlist
+            </button>
+          )}
+        </div>
+      )}
+
     </div>
   );
 }

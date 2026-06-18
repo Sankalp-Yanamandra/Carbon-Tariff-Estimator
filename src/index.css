@@ -747,3 +747,37 @@ THE GRID FOR OUR CARDS */
   color: #dc2626;
   background: #fef2f2; /* Very light red background on hover */
 }
+
+
+/* WATCHLIST PIN BUTTONS in `Shipments` page */
+.pin-btn, .pinned-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pin-btn {
+  background: #f8fafc;
+  color: #0f172a;
+  border: 2px solid #e2e8f0;
+}
+
+.pin-btn:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.pinned-btn {
+  background: #fef3c7;
+  color: #b45309;
+  border: 2px solid #fcd34d;
+}
+
+.pinned-btn:hover {
+  background: #fde68a;
+  border-color: #fbbf24;
+}

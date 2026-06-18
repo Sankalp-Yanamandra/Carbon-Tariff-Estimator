@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
@@ -11,6 +11,8 @@ function ShipmentDetails() {
   const { id } = useParams();
   // state that stores details of each route
   const [route, setRoute] = useState(null);
+
+  const navigate = useNavigate();
 
   // load side effects only once : when the page/component reloads
   useEffect(() => {
@@ -41,11 +43,14 @@ function ShipmentDetails() {
   return (
     <div className="details">
 
-      {/* escape latch to return to dashboard */}
-      <Link to="/shipments" className="back-link">
-        ← Back to Dashboard
-      </Link>
-
+      {/* escape latch to return JUST THE PREVIOUS PAGE,user came from : Dynamic History Navigation Maps(-1) */}
+      <button 
+        onClick={() => navigate(-1)} 
+        className="back-link" 
+        style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: 0 }}
+      >
+        ← Go Back
+      </button>
 
       <img 
         src={route.image || DEFAULT_IMAGE} 
