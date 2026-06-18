@@ -697,3 +697,17 @@ h1, h2, h3 {
   color: #fafafa !important;
   border-color: #52525b !important;
 }
+
+
+/* --- FIX FOR BROWSER DEFAULT PASSWORD REVEAL (EYE) ICON --- */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  /* Inverts the default black icon to white so it pops on the dark background */
+  filter: invert(100%); 
+  cursor: pointer;
+}
+
+/* Optional: Add a slight hover effect to the eye icon */
+input[type="password"]::-ms-reveal:hover {
+  opacity: 0.8;
+}
