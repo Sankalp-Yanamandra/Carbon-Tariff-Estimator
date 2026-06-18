@@ -5,6 +5,18 @@
       "email": "gary@google.edu",
       "password": "1234@1234",
       "id": "Bgg15E3A0Ac"
+    },
+    {
+      "name": "mayank pandey",
+      "email": "mayank@gmail.com",
+      "password": "12234@1234",
+      "id": "mqt8RT8gjEA"
+    },
+    {
+      "name": "sumona",
+      "email": "sumona@gmail.com",
+      "password": "1234@1234",
+      "id": "aSp_gVlDqaA"
     }
   ],
   "routes": [
@@ -16,11 +28,11 @@
       "transportMode": "Sea Freight",
       "weightTons": 5,
       "distanceKm": 18000,
-      "image": "https://images.unsplash.com/photo-1494412651409-8963ce7935a7",
+      "image": "https://images.unsplash.com/photo-1586528116311-ad8ed7c663c0",
       "emissionsKg": "1350.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "114.75",
-      "description": "Standard sea freight route from Ho Chi Minh City port to Hamburg. Slow but highly carbon efficient."
+      "description": "Standard TEU container sea freight route from Ho Chi Minh City port to Hamburg. Highly carbon efficient for bulk metals."
     },
     {
       "id": "2",
@@ -30,25 +42,11 @@
       "transportMode": "Air Freight",
       "weightTons": 2,
       "distanceKm": 9800,
-      "image": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05",
+      "image": "https://images.unsplash.com/photo-1540962351504-03099e0a754b",
       "emissionsKg": "9800.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "833.00",
-      "description": "Expedited air freight from Taipei to Paris. Extremely fast but incurs a massive carbon penalty."
-    },
-    {
-      "id": "3",
-      "origin": "China",
-      "destination": "Italy",
-      "productCategory": "Aluminum/Steel",
-      "transportMode": "Sea Freight",
-      "weightTons": 20,
-      "distanceKm": 15000,
-      "image": "https://images.unsplash.com/photo-1586528116311-ad8ed7c80a30",
-      "emissionsKg": "4500.00",
-      "euCarbonPriceEUR": 85,
-      "estimatedTariffEUR": "382.50",
-      "description": "Bulk steel transport via maritime shipping to Genoa. High weight offsets the low emission factor."
+      "description": "Expedited air freight of high-value semiconductors from Taipei to Paris. Extremely fast transit but incurs a massive carbon penalty."
     },
     {
       "id": "4",
@@ -58,11 +56,11 @@
       "transportMode": "Air Freight",
       "weightTons": 1.5,
       "distanceKm": 6000,
-      "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec",
+      "image": "https://images.unsplash.com/photo-1569154941061-e231b4732ef1",
       "emissionsKg": "4500.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "382.50",
-      "description": "High-value microchips flown into Madrid. Urgent delivery window dictates high-carbon transport."
+      "description": "Urgent aerospace microchips flown into Madrid. Tight delivery window dictates a high-carbon transport mode."
     },
     {
       "id": "5",
@@ -72,11 +70,11 @@
       "transportMode": "Truck",
       "weightTons": 15,
       "distanceKm": 1000,
-      "image": "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7",
+      "image": "https://images.unsplash.com/photo-1586191552066-d52cd17ca217",
       "emissionsKg": "1500.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "127.50",
-      "description": "Cross-border land transport of heavy construction materials. Moderate carbon impact."
+      "description": "Cross-border heavy goods vehicle (HGV) transport of industrial construction materials. Moderate supply chain carbon impact."
     },
     {
       "id": "6",
@@ -86,11 +84,11 @@
       "transportMode": "Sea Freight",
       "weightTons": 50,
       "distanceKm": 12000,
-      "image": "https://images.unsplash.com/photo-1534398079543-7ae6d016b86a",
+      "image": "https://images.unsplash.com/photo-1577704905591-6284687d69b3",
       "emissionsKg": "9000.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "765.00",
-      "description": "Massive shipment of rolled aluminum landing in Rotterdam."
+      "description": "Massive maritime shipment of rolled aluminum landing in the Port of Rotterdam via the Suez Canal."
     },
     {
       "id": "7",
@@ -100,11 +98,11 @@
       "transportMode": "Air Freight",
       "weightTons": 0.5,
       "distanceKm": 7500,
-      "image": "https://images.unsplash.com/photo-1517420704952-d9f39740e386",
+      "image": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05",
       "emissionsKg": "1875.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "159.38",
-      "description": "Lightweight consumer electronics routed through Stockholm."
+      "description": "Lightweight consumer electronics routed through Stockholm via commercial air cargo."
     },
     {
       "id": "8",
@@ -114,11 +112,11 @@
       "transportMode": "Truck",
       "weightTons": 25,
       "distanceKm": 1200,
-      "image": "https://images.unsplash.com/photo-1519003722824-194d4455a60c",
+      "image": "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7",
       "emissionsKg": "3000.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "255.00",
-      "description": "Fertilizer transport across the Strait of Gibraltar utilizing roll-on/roll-off truck ferries."
+      "description": "Agricultural fertilizer transport across the Strait of Gibraltar utilizing RoRo (Roll-on/roll-off) truck ferries."
     },
     {
       "id": "9",
@@ -156,11 +154,11 @@
       "transportMode": "Sea Freight",
       "weightTons": 40,
       "distanceKm": 9200,
-      "image": "https://images.unsplash.com/photo-1581094794329-c8112a89af12",
+      "image": "https://images.unsplash.com/photo-1494412651409-8963ce7935a7",
       "emissionsKg": "5520.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "469.20",
-      "description": "Industrial grade cement transport via cargo vessel across the Atlantic."
+      "description": "Industrial grade cement transport via bulk cargo vessel across the Atlantic Ocean."
     },
     {
       "id": "12",
@@ -170,11 +168,11 @@
       "transportMode": "Air Freight",
       "weightTons": 1,
       "distanceKm": 5500,
-      "image": "https://images.unsplash.com/photo-1555664424-778a1e5e1b48",
+      "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957",
       "emissionsKg": "2750.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "233.75",
-      "description": "Specialized electronics hardware flown directly to Paris."
+      "description": "Specialized electronics hardware flown directly to Paris CDG airport."
     },
     {
       "id": "13",
@@ -184,11 +182,11 @@
       "transportMode": "Truck",
       "weightTons": 18,
       "distanceKm": 2800,
-      "image": "https://images.unsplash.com/photo-1611082529881-897db674d81f",
+      "image": "https://images.unsplash.com/photo-1519003722824-194d4455a60c",
       "emissionsKg": "5040.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "428.40",
-      "description": "Agricultural fertilizer moving through multi-modal truck ferries in the Mediterranean."
+      "description": "Agricultural fertilizer moving through multi-modal truck corridors in the Mediterranean."
     },
     {
       "id": "14",
@@ -198,11 +196,11 @@
       "transportMode": "Sea Freight",
       "weightTons": 100,
       "distanceKm": 16000,
-      "image": "https://images.unsplash.com/photo-1590496794008-383c8070b257",
+      "image": "https://images.unsplash.com/photo-1534398079543-7ae6d016b86a",
       "emissionsKg": "24000.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "2040.00",
-      "description": "Heavy industrial steel beams. Highest overall emissions due to extreme weight and distance."
+      "description": "Heavy industrial steel beams. Highest overall emissions due to extreme weight and maritime distance."
     },
     {
       "id": "15",
@@ -212,7 +210,7 @@
       "transportMode": "Air Freight",
       "weightTons": 0.8,
       "distanceKm": 10000,
-      "image": "https://this-domain-is-fake-and-will-fail.com/image.png",
+      "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957",
       "emissionsKg": "4000.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "340.00",
@@ -226,11 +224,11 @@
       "transportMode": "Truck",
       "weightTons": 22,
       "distanceKm": 1100,
-      "image": "https://images.unsplash.com/photo-1586864387789-628af9feed72",
+      "image": "https://images.unsplash.com/photo-1559297434-fae8a1916a79",
       "emissionsKg": "2420.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "205.70",
-      "description": "Regional truck freight covering short cross-border distances."
+      "description": "Regional truck freight covering short cross-border distances via the Baltic Sea ferries."
     },
     {
       "id": "17",
@@ -240,11 +238,11 @@
       "transportMode": "Sea Freight",
       "weightTons": 12,
       "distanceKm": 8500,
-      "image": "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
+      "image": "https://images.unsplash.com/photo-1590496794008-383c8070b257",
       "emissionsKg": "1530.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "130.05",
-      "description": "Scrap metal upcycling route mapped along the West African coast."
+      "description": "Scrap metal upcycling route mapped along the West African maritime corridor."
     },
     {
       "id": "18",
@@ -254,11 +252,11 @@
       "transportMode": "Air Freight",
       "weightTons": 2.5,
       "distanceKm": 5200,
-      "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957",
+      "image": "https://images.unsplash.com/photo-1517420704952-d9f39740e386",
       "emissionsKg": "6500.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "552.50",
-      "description": "Commercial electronics hubs connecting Dubai to Paris."
+      "description": "Commercial electronics logistics hubs connecting Dubai International to Paris."
     },
     {
       "id": "19",
@@ -282,11 +280,25 @@
       "transportMode": "Sea Freight",
       "weightTons": 35,
       "distanceKm": 12000,
-      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
+      "image": "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
       "emissionsKg": "6300.00",
       "euCarbonPriceEUR": 85,
       "estimatedTariffEUR": "535.50",
-      "description": "Maritime transport of raw bulk materials bypassing the Panama canal."
+      "description": "Maritime transport of raw bulk materials bypassing the Panama canal for deeper drafts."
+    },
+    {
+      "origin": "Mumbai",
+      "destination": "Dubai",
+      "productCategory": "Electronics",
+      "transportMode": "Truck",
+      "weightTons": 2500,
+      "distanceKm": 7540,
+      "image": "https://safefly.aero/wp-content/uploads/al_opt_content/IMAGE/safefly.aero/wp-content/uploads/2025/12/Cargo-Aircraft-Loading-Operations-for-International-Air-Freight-Charter-1200x675.png.bv_resized_mobile.png.bv.webp?bv_host=safefly.aero",
+      "emissionsKg": "1885000.00",
+      "euCarbonPriceEUR": 85,
+      "estimatedTariffEUR": "160225.00",
+      "description": "Custom Truck route from Mumbai to Dubai.",
+      "id": "YwjNHQG-wVU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

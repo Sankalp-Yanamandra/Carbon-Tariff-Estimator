@@ -2,6 +2,8 @@ import { useState } from "react";
 import api from "../services/api";
 import { useNavigate, Link } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 function Login() {
   const navigate = useNavigate();
 
@@ -24,18 +26,23 @@ function Login() {
         // We have to use JSON.stringify because localStorage ONLY accepts strings :  js obj => json obj
         localStorage.setItem("user", JSON.stringify(response.data[0]));
         
-
-        alert(`Logged In successfully. Welcome Back ${response.data[0].name} !!!`);
          
+        toast.success(`Logged In successfully. Welcome Back , ${response.data[0].name.toUpperCase()} !!!`)
+
+        // after 2s to let alert() show properly
+        setTimeout(() => {
         navigate("/shipments");
         
         // Force a quick page reload so our Navbar updates to show the logged-in state(since login n shipment not related, so to
         // reflect changes in localStorage for Shipments page)
         window.location.reload(); 
+        }, 2000); // 2000 milliseconds = 2 seconds
+
       } else {
-        alert("Invalid Corporate Credentials. Please try again.");
+        toast.error("Invalid Corporate Credentials. Please try again.")
       }
     } catch (error) {
+      toast.error('Login Failed. Try again.')
       console.log("Login error due to :", error);
     }
   }

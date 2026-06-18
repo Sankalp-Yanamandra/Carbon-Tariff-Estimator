@@ -2,7 +2,10 @@ import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { pinRoute, unpinRoute } from "../features/watchlistSlice";
+import { toast } from "react-toastify";
 
+// IMPORT REACT-ICONS 
+import { FaTruck, FaPlane, FaShip, FaCloud, FaEuroSign } from "react-icons/fa";
 
 // The 'route' prop is passed down from the parent Shipments page, destructured i.e. (here) rather than props.route.something
 // use just route.something
@@ -27,13 +30,25 @@ function RouteCard({ route, onDelete }) {
   function handlePin() {
     // send complete route obj to store
     dispatch(pinRoute(route));
+
+    //send alert to user
+    toast.success(`📌 PINNED ${route.origin} ⟶ ${route.destination} via ${route.transportMode}`)
   }
 
   // 5. Function to handle unpinning (so they can toggle it right from the dashboard!)
   function handleUnpin() {
     // send to route id to store for unpinning
     dispatch(unpinRoute(route.id));
+
+    toast.warning(`UNPINNED ${route.origin} ⟶ ${route.destination} via ${route.transportMode}`)
   }
+
+  // render correct SVG based on mode of transport
+const getTransportIcon = (mode) => {
+    if (mode === "Air Freight") return <FaPlane style={{ marginRight: "8px", color: "#64748b" }} />;
+    if (mode === "Truck") return <FaTruck style={{ marginRight: "8px", color: "#64748b" }} />;
+    return <FaShip style={{ marginRight: "8px", color: "#64748b" }} />;
+  };
 
 
   return (
@@ -53,9 +68,21 @@ function RouteCard({ route, onDelete }) {
       <p className="category">{route.productCategory}</p>
       
       <div className="card-metrics">
-        <p>🚛 Mode: {route.transportMode}</p>
-        <p>☁️ CO2: {route.emissionsKg} kg</p>
-        <p>💶 Tariff: €{route.estimatedTariffEUR}</p>
+      {/* Implement the clean SVG icons with Flexbox alignment */}
+        <p style={{ display: "flex", alignItems: "center" }}>
+          {getTransportIcon(route.transportMode)}
+          <strong>Mode:</strong> <span style={{ marginLeft: "5px" }}>{route.transportMode}</span>
+        </p>
+        
+        <p style={{ display: "flex", alignItems: "center", color: "#ef4444" }}>
+          <FaCloud style={{ marginRight: "8px" }} /> 
+          <strong>CO2:</strong> <span style={{ marginLeft: "5px" }}>{route.emissionsKg} kg</span>
+        </p>
+        
+        <p style={{ display: "flex", alignItems: "center", color: "#f59e0b" }}>
+          <FaEuroSign style={{ marginRight: "8px" }} /> 
+          <strong>Tariff:</strong> <span style={{ marginLeft: "5px" }}>€{route.estimatedTariffEUR}</span>
+        </p>
       </div>
 
       <div className="card-actions">
@@ -67,35 +94,36 @@ function RouteCard({ route, onDelete }) {
         <Link className="view-btn" to={`/shipments/${route.id}`}>View Route Details</Link>
 
 
-        {/* edit, delete feature only for logged in users : conditional rendering */}
-        {user && (
-          <>
-            <Link className="edit-btn" to={`/edit-shipment/${route.id}`}>Edit Route Details</Link>
-            <button className="delete-btn" onClick={() => onDelete(route.id, route.transportMode, route.origin, route.destination)}>
-              Delete Route
-            </button>
-          </>
-        )}
-      </div>
-
-      {/* Watchlist Pin Button Only for logged-in users*/}
-      {user && (
+        {/* edit, delete, pin feature only for logged in users : conditional rendering */}
         <div style={{ padding: "0 15px 15px 15px" }}>
-          {/* if pinned: show pinned button, if clicked triggers fn to unpin */}
-          {isPinned ? (
-            <button className="pinned-btn" onClick={handleUnpin}>
-              📌 Pinned to Watchlist
-            </button>
-            // if unpinned, show pin button, if clicked triggeres fn to pin
+        
+          {/* If user IS logged in, show the normal functional buttons */}
+          {user ? (
+            isPinned ? (
+              <button className="pinned-btn" onClick={handleUnpin}>
+                📌 Pinned to Watchlist
+              </button>
+            ) : (
+              <button className="pin-btn" onClick={handlePin}>
+                ⭐ Pin to Watchlist
+              </button>
+            )
           ) : (
-            <button className="pin-btn" onClick={handlePin}>
+            
+            /* If user IS NOT logged in, show a "teaser" button that triggers a toast */
+            <button 
+              className="pin-btn" 
+              onClick={() => toast.info("🔒 Please log in to pin routes to your Watchlist!")}
+              // Make it look slightly disabled
+              style={{ opacity: 0.8, borderStyle: "dashed" }} 
+            >
               ⭐ Pin to Watchlist
             </button>
+            
           )}
-        </div>
-      )}
-
-    </div>
+          </div>
+      </div>
+  </div>
   );
 }
 

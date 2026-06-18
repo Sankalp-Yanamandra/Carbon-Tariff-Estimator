@@ -1,5 +1,11 @@
 import { Navigate } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
+import { FaLock } from "react-icons/fa";
+
+
+
 // The 'children' prop represents whatever page we wrap this around i.e. <tag> whatever btwn these : children </tag>
 function ProtectedRoute({ children }) {
     // check if user logged in or not?
@@ -7,7 +13,11 @@ function ProtectedRoute({ children }) {
 
   // If they aren't logged in, redirect them immediately to Login!
   if (!user) {
-    alert(`Sorry, Please Login First to access more features...`)
+    
+    toast.error(
+    <div>
+      <FaLock /> Secure area. Please log in to access these features.
+    </div>)
     return <Navigate to="/login" replace />;
   }
 

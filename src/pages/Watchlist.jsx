@@ -2,6 +2,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { unpinRoute } from "../features/watchlistSlice";
 import { Link } from "react-router-dom";
 
+// importing svg icons
+import { FaTruck, FaPlane, FaShip, FaWeightHanging, FaCloud, FaEuroSign } from "react-icons/fa";
+
 function Watchlist() {
     // Destructure for using hook
   const dispatch = useDispatch();
@@ -12,10 +15,18 @@ function Watchlist() {
   // to handle issue in loading of images using the url
   const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1494412651409-8963ce7935a7";
 
+  // render icon based on mode of transport
+const getTransportIcon = (mode) => {
+    if (mode === "Air Freight") return <FaPlane style={{ marginRight: "8px", color: "#64748b" }} />;
+    if (mode === "Truck") return <FaTruck style={{ marginRight: "8px", color: "#64748b" }} />;
+    return <FaShip style={{ marginRight: "8px", color: "#64748b" }} />;
+  };
+
+
   return (
     <>
       <div className="dashboard-header">
-        <h1>Critical Focus Routes</h1>
+        <h1>My Critical Shipment Routes</h1>
 
         {/* Link : when user clicks, takes them back to `Shipments` page */}
         <Link to="/shipments" className="back-link" style={{ fontSize: "1rem" }}>
@@ -52,10 +63,25 @@ function Watchlist() {
               <p className="category">{route.productCategory}</p>
               
               <div className="card-metrics">
-                <p>🚛 Mode: <strong>{route.transportMode}</strong></p>
-                <p>⚖️ Weight: {route.weightTons} Tons</p>
-                <p style={{ color: "#ef4444", fontWeight: "bold" }}>☁️ CO2: {route.emissionsKg} kg</p>
-                <p style={{ color: "#ef4444", fontWeight: "bold" }}>💶 Tariff: €{route.estimatedTariffEUR}</p>
+<p style={{ display: "flex", alignItems: "center" }}>
+                  {getTransportIcon(route.transportMode)}
+                  <strong>Mode:</strong> <span style={{ marginLeft: "5px" }}>{route.transportMode}</span>
+                </p>
+
+                <p style={{ display: "flex", alignItems: "center" }}>
+                  <FaWeightHanging style={{ marginRight: "8px", color: "#64748b" }} />
+                  <strong>Weight:</strong> <span style={{ marginLeft: "5px" }}>{route.weightTons} Tons</span>
+                </p>
+                
+                <p style={{ display: "flex", alignItems: "center", color: "#ef4444" }}>
+                  <FaCloud style={{ marginRight: "8px" }} /> 
+                  <strong>CO2:</strong> <span style={{ marginLeft: "5px" }}>{route.emissionsKg} kg</span>
+                </p>
+                
+                <p style={{ display: "flex", alignItems: "center", color: "#f59e0b" }}>
+                  <FaEuroSign style={{ marginRight: "8px" }} /> 
+                  <strong>Tariff:</strong> <span style={{ marginLeft: "5px" }}>€{route.estimatedTariffEUR}</span>
+                </p>
               </div>
 
               <div className="card-actions">

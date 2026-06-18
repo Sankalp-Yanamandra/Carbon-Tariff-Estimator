@@ -3,6 +3,7 @@ import api from "../services/api";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 function EditShipment() {
@@ -80,9 +81,11 @@ function EditShipment() {
       // Use HTTP PUT request to update existing data : http://localhost:3000/routes => baseurl/routes 
       await api.put(`/routes/${id}`, finalPayload);
 
+      toast.success('Shipment Route Updated.')
     //   automatically navigate to Shipments pages on Updation.
       navigate("/shipments");
     } catch (error) {
+      toast.warning('Shipment Route Update failed.')
       console.log("Failed to update shipment", error);
     }
   }

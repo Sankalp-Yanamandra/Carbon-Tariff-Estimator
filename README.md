@@ -24,12 +24,16 @@ An Application built to help e-commerce businesses to calculate supply chain emi
 - React-Router
 - Redux Toolkit
 - React-Redux Library : connects React with Redux(toolkit)
+- react-toastify Library : alernatives `alert()` popups
+- react-confirm-alert  library : alernative to `windows.confirm()`.
+- react-loader-spinner library : `Oval` loading indicators.
+- react-icons Library : for Operating System independant SVG icons.
 - Axios JavaScript Library : to call REST API from components.
 - REST API
 - JSON-server
 - JSX
 - JS-ES6+
-- CSS (flex, grid).
+- CSS (flex, grid)
 
 
 <!-- Phase 1-->
@@ -277,3 +281,59 @@ export const watchlistSlice = createSlice({
 - Implemented dynamic History Navigation (`useNavigate(-1)`) in `ShipmentDetails.jsx` to allow user to go back to immediately visited page(`Shipment.jsx` or `Watchlist.jsx`) to maintain user's flow.[in place of `<Link>` tag.]
 
 
+### Phase 4.1 : UI/UX Modification
+- instead of blocking, styleless native browser `alert()` popups,
+  used non-blocking toast notifications via `react-toastify` library.
+  ```javascript
+  // alert('message')
+  toast.error('msg')
+  toast.success('msg')
+  toast.warning('msg')
+  toast.info('msg')
+  ```
+- instead of using `windows.confirm()` popup for `Delete Account`, used a customizable, `react-modal`.
+  ```javacript
+    confirmAlert({
+      title: 'Confirm Account Deletion',
+      message: 'Are you sure you want to permanently delete your corporate account? This action cannot be undone.',
+      buttons: [
+        {
+          label: 'Yes, Delete It',
+          // 2. If they click yes, we run your EXACT asynchronous logic!
+          onClick: async () => {
+            // only for logged in user
+            if (user) {
+              try {
+                // Delete the user from the JSON database
+                
+                // Clear local storage
+                
+                // Show the success toast
+                toast.success(`Corporate Account deleted successfully. Sorry to see you go.`); 
+
+                // Wait 2 seconds, then redirect and refresh
+                setTimeout(() => {
+                    navigate("/register");
+                    window.location.reload();
+                }, 2000);
+
+              } catch (error) {
+                toast.error("Couldn't delete the account.");
+                console.log("Error deleting account:", error);
+              }
+            }
+          }
+        },
+        {
+          label: 'Cancel',
+          // If they click cancel, the modal simply closes and does nothing.
+          onClick: () => {} 
+        }
+      ]
+    });
+  ```
+- implemented `Oval` loading indicators to `Shipments` and `ShipmentDetails` pages to visually communicate background data fetching to the user, eliminating blank screens during load times.
+
+- in-place of O.S. dependant text emojis, used O.S. independant SVG icons via `react-icons` Library.
+
+- `Teaser UI` : Instead of completely hiding features from unauthenticated users, the app uses "Feature Discovery." Logged-out users see a teaser banner and greyed-out action buttons (indicating locked features) that trigger a prompt to create an account, to unlock the features.

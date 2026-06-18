@@ -1,54 +1,34 @@
-/* Reset default browser margins and padding so our app looks consistent across all browsers */
+/* Reset default browser margins and padding */
 * {
   margin: 0;
   padding: 0;
-  /* Ensures padding and borders are included in the element's total width and height */
   box-sizing: border-box; 
 }
 
-/* Base styles for the entire application */
+/* Base styles - FINTECH / OLED DARK THEME */
 body {
-  /* Use a clean, modern font */
-  font-family: Arial, sans-serif;
-  /* A subtle, professional gradient background fitting a corporate/logistics theme */
-  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-  /* Ensures the body always takes up at least the full height of the screen */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #09090b; /* True deep black/zinc */
   min-height: 100vh;
-  /* Dark slate color for readability */
-  color: #1e293b;
+  color: #fafafa; /* Crisp, high-contrast white */
+  line-height: 1.5;
 }
 
-/* Remove default blue underlines from all links */
 a {
   text-decoration: none;
 }
 
-/* NAVBAR STYLES
-  for flex-
-  parent : nav
-  children : nav-left, nav-right
-*/
+/* NAVBAR STYLES */
 nav {
-  /* Dark, professional blue gradient */
-  background: linear-gradient(135deg, #0f172a, #1e3a8a);
-  /* 20px padding top/bottom, 40px left/right */
+  background-color: #09090b; /* Blends seamlessly with body */
   padding: 20px 40px;
-  /* Use Flexbox to align items in a row */
   display: flex;
-  /* Space out the links by 25px */
   gap: 25px;
-  /* Center items vertically */
   align-items: center;
-  /* Add a subtle drop shadow below the navbar */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-
-  /* nav-left n nav-right on opp ends of navbar */
+  border-bottom: 1px solid #27272a; /* Sharp, high-contrast border */
   justify-content: space-between; 
-  align-items: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* NEW: Make sure the links inside the two groups sit side-by-side with gaps */
 .nav-left, 
 .nav-right {
   display: flex;
@@ -56,114 +36,86 @@ nav {
   gap: 25px;
 }
 
-/*
-  children of nav-left n nav-right (for flex) 
- */
 nav > .nav-left > a, nav > .nav-right > a {
-  /* Make the text white */
-  color: white;
-  /* Make the text slightly bolder */
-  font-weight: 600;
-  /* Add a smooth 0.3-second animation when hovering over the link */
-  transition: 0.3s;
+  color: #a1a1aa; /* Muted grey for inactive links */
+  font-weight: 500;
+  transition: color 0.2s;
 }
 
 nav > a:hover {
-  /* Change the color to a light blue when the user hovers over it */
-  color: #93c5fd;
+  color: #fafafa; /* Bright white on hover */
 }
 
 /* MAIN CONTENT CONTAINER */
-/* main wraps around <AppRoutes/> i.e styling everything on screen except Navbar*/
 main {
-  /* Take up 90% of the screen width... */
   width: 90%;
-  /* ...but never grow larger than 1200px wide */
   max-width: 1200px;
-  /* 30px margin on top/bottom, 'auto' on left/right centers the container on the screen */
   margin: 30px auto;
 }
 
 /* --- HOME PAGE SECTIONS --- */
-
-/* Centers everything and removes the top margin we had previously */
 .home-container {
   text-align: center;
 }
 
-/* Base style for all sections to ensure they take up screen space and are scrollable */
 section {
-  /* Ensure each section takes up at least 70% of the screen height : vh == viewport height */
   min-height: 70vh;
-  /* Use flexbox to display children side by side(default) */
   display: flex;
-  /* display children : one below other */
   flex-direction: column;
-  /* center children on MAIN AXIS(here y axis) */
   justify-content: center;
-  /* center children on CROSS AXIS(here x-axis)*/
   align-items: center;
-  /* Add padding so content doesn't touch the edges */
   padding: 40px 20px;
 }
 
-/* HERO SECTION */
 .hero-section {
-  /* Push it down slightly from the navbar */
   margin-top: 20px;
 }
 
 .hero-section h1 {
-  /* Make the main title massive */
-  font-size: 3rem;
-  color: #0f172a;
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fafafa; 
   margin-bottom: 20px;
 }
 
 .subtitle {
-  font-size: 1.2rem;
-  color: #475569;
+  font-size: 1.25rem;
+  color: #a1a1aa; 
   max-width: 600px;
-  line-height: 1.6;
   margin-bottom: 40px;
 }
 
-/* The Call to Action Button */
+/* Primary Action Button - Electric Violet */
 .cta-button {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: white;
+  background-color: #fafafa;
+  color: #09090b;
   padding: 15px 30px;
   border-radius: 8px;
   font-size: 1.1rem;
-  font-weight: bold;
-  transition: 0.3s;
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); 
-  
-  /* NEW ADDITIONS FOR <button> TAGS: */
-  border: none; /* Removes the ugly default browser border */
-  cursor: pointer; /* Turns the mouse into a pointing hand when hovering */
-  font-family: inherit; /* Ensures the button uses our global Arial font */
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: none; 
+  cursor: pointer; 
+  font-family: inherit; 
 }
 
 .cta-button:hover {
-  /* on hover, move button up by 3 px */
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6);
+  background-color: #e4e4e7;
+  transform: translateY(-2px);
 }
 
-/* INFO SECTION (The Explanation) */
+/* INFO SECTION */
 .info-section {
-  /* Give this section a subtle white background to separate it from the others */
-  background: white;
-  border-radius: 20px;
-  /* Box shadow for depth */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  background-color: #18181b; /* Slightly lighter than body */
+  border: 1px solid #27272a; 
+  border-radius: 16px;
   margin: 40px 0;
 }
 
 .info-section h2 {
   font-size: 2.2rem;
-  color: #0f172a;
+  color: #fafafa;
   margin-bottom: 25px;
 }
 
@@ -171,22 +123,21 @@ section {
   max-width: 800px;
   text-align: left;
   font-size: 1.1rem;
-  line-height: 1.8;
-  color: #334155;
+  color: #d4d4d8; 
 }
 
 .info-content p {
   margin-bottom: 15px;
 }
 
-/* STATS / GEOPOLITICS SECTION */
+/* STATS SECTION */
 .stats-section h2 {
   font-size: 2.2rem;
   margin-bottom: 15px;
+  color: #fafafa;
 }
 
 .stats-grid {
-  /* Create a 3-column grid for our data cards */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
@@ -196,23 +147,24 @@ section {
 }
 
 .stat-card {
-  background: white;
+  background-color: #18181b;
+  border: 1px solid #27272a;
   padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  /* Make the cards flex columns so text aligns nicely */
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .stat-card h3 {
-  color: #2563eb;
+  color: #a1a1aa; 
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   margin-bottom: 15px;
 }
 
 .stat-card ul {
-  /* Remove default bullet points */
   list-style: none;
   padding: 0;
 }
@@ -220,232 +172,202 @@ section {
 .stat-card li {
   margin-bottom: 10px;
   font-weight: 500;
-  color: #475569;
+  color: #fafafa;
 }
 
 .massive-number {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #e11d48;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #8b5cf6; /* Electric Violet */
   margin-bottom: 10px;
+  line-height: 1;
 }
 
-
-
-
-
-
-/* HEADERS of 'RouteCard' , 'Shipment', 'ShipmentDetails' components */
-h1 {
-  /* Give spacing below the main page titles */
+/* HEADERS */
+h1, h2, h3 {
   margin-bottom: 20px;
-  color: #0f172a;
+  color: #fafafa;
 }
 
-/*
-in 'Shipments' component 
-THE GRID FOR OUR CARDS */
+/* THE GRID FOR OUR CARDS */
 .destinations {
-  /* Use CSS Grid to automatically create columns */
   display: grid;
-  /* Automatically fit as many 280px wide cards as possible on the screen */
-  /*
-    grid-template-columns is a CSS property used in CSS Grid Layout
-     to define the number and width of columns in a grid container.
-  */
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  /* Gap between the cards */
   gap: 25px;
 }
 
-/* INDIVIDUAL ROUTE CARD STYLES 
-  'RouteCard' component
-*/
+/* INDIVIDUAL ROUTE CARD STYLES */
 .card {
-  /* White to very light grey gradient for a clean look */
-  background: linear-gradient(145deg, #ffffff, #f8fafc);
-  border-radius: 15px;
-  /* Ensure images don't spill out of the rounded corners */
+  background-color: #18181b; 
+  border: 1px solid #27272a;
+  border-radius: 12px;
   overflow: hidden;
-  /* Soft shadow to lift it off the background */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  /* Smooth animation setup for when we hover over it */
-  transition: 0.3s;
+  transition: all 0.2s ease;
 }
 
 .card:hover {
-  /* Lift the card up 10 pixels when hovered */
-  transform: translateY(-10px);
-  /* Make the shadow deeper to emphasize the lift */
-  box-shadow: 0 15px 30px rgba(30, 58, 138, 0.18);
+  transform: translateY(-5px);
+  border-color: #52525b;
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.8);
 }
 
 .card > img {
   width: 100%;
   height: 200px;
-  /* Ensures the image fills the 200px box without stretching */
   object-fit: cover;
-  transition: 0.4s;
-
   display: block; 
-  background-color: #e2e8f0; /* Light slate gray placeholder */
-  color: transparent; /* Hides the ugly default "broken image" alt text */
-}
-
-.card:hover img {
-  /* Slightly zoom the image when the card is hovered */
-  transform: scale(1.08);
+  background-color: #27272a; 
+  color: transparent; 
 }
 
 .card > h3 {
   padding: 15px 15px 5px;
-  color: #0f172a;
+  color: #fafafa;
+  font-size: 1.1rem;
 }
 
 .card > p.category {
   padding: 0 15px;
-  color: #2563eb; /* Theme blue for category */
-  font-weight: bold;
-  font-size: 0.9rem;
+  color: #8b5cf6; /* Accent color */
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .card-metrics {
-  padding: 10px 15px;
-  color: #475569;
+  padding: 15px;
+  color: #d4d4d8;
   font-size: 0.95rem;
-  line-height: 1.5;
 }
 
+.card-metrics p {
+  margin-bottom: 8px;
+}
 
-
-/* SHIPMENT DETAILS PAGE STYLES
-  'ShipmentDetails' component
-*/
+/* SHIPMENT DETAILS PAGE STYLES */
 .details {
-  background: linear-gradient(145deg, #ffffff, #f8fafc);
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  background-color: #18181b;
+  border: 1px solid #27272a;
+  padding: 40px;
+  border-radius: 16px;
 }
 
 .details > img {
   width: 100%;
   height: 400px;
   object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 25px;
-
-
+  border-radius: 8px;
+  margin-bottom: 30px;
   display: block;
-  background-color: #e2e8f0;
+  background-color: #27272a;
   color: transparent;
 }
 
 .details-grid {
-  /* A smaller grid for the data points */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin-top: 25px;
-  padding-top: 20px;
-  border-top: 1px solid #e2e8f0;
+  gap: 24px;
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #27272a;
 }
 
 .details h3 {
-  color: #2563eb;
-  font-size: 1rem;
-  margin-bottom: 5px;
+  color: #a1a1aa;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
 }
 
 .impact-box {
-  margin-top: 30px;
-  padding: 20px;
-  /* Light red/orange background to highlight the financial impact */
-  background: #fff1f2; 
-  border-left: 5px solid #e11d48;
+  margin-top: 40px;
+  padding: 24px;
+  background-color: #09090b; 
+  border: 1px solid #27272a;
+  border-left: 4px solid #8b5cf6;
   border-radius: 8px;
 }
 
 .impact-box h3 {
-  color: #e11d48;
-  margin-bottom: 10px;
+  color: #fafafa;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
 }
 
 .impact-box p {
-  line-height: 1.8;
   font-size: 1.1rem;
-  color: #1e293b;
+  color: #d4d4d8;
+  margin-bottom: 10px;
 }
 
 .highlight {
-  font-size: 1.3rem;
-  color: #be123c;
+  font-size: 1.4rem;
+  color: #8b5cf6;
+  font-weight: bold;
 }
-
 
 /* DASHBOARD HEADER */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 /* ADD BUTTON STYLES */
 .add-btn {
   display: inline-block;
-  padding: 12px 20px;
-  border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  transition: 0.3s;
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: #fafafa;
+  font-weight: 500;
+  background-color: #8b5cf6;
+  transition: all 0.2s;
 }
 
 .add-btn:hover {
-  /* move up by 3px on hovering */
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+  background-color: #7c3aed;
 }
 
 /* FORM CONTAINER */
-.form-container {
-  max-width: 600px;
-  margin: 40px auto;
-  background: white;
-  padding: 35px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+.form-container, .auth-card {
+  max-width: 500px;
+  margin: 60px auto;
+  background-color: #18181b;
+  border: 1px solid #27272a;
+  padding: 40px;
+  border-radius: 16px;
 }
 
-.form-container h2 {
+.form-container h2, .auth-card h1 {
   text-align: center;
-  margin-bottom: 25px;
-  color: #0f172a;
+  margin-bottom: 30px;
+  color: #fafafa;
+  font-weight: 600;
 }
 
-/* SHARED INPUT & SELECT STYLES */
+/* SHARED INPUT STYLES */
 .form-container input,
-.form-container select {
+.form-container select,
+.auth-card input {
   width: 100%;
-  padding: 14px;
-  margin-bottom: 18px;
-  /* Light grey border */
-  border: 2px solid #e2e8f0; 
-  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  background-color: #09090b; 
+  border: 1px solid #27272a; 
+  color: #fafafa; 
+  border-radius: 8px;
   font-size: 16px;
-  /* Removes default browser highlighting */
   outline: none; 
-  /* Smooth transition when clicking into the box */
-  transition: 0.3s; 
+  transition: border-color 0.2s; 
 }
 
-/* WHEN THE USER CLICKS INTO AN INPUT */
 .form-container input:focus,
-.form-container select:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 10px rgba(37, 99, 235, 0.15);
+.form-container select:focus,
+.auth-card input:focus {
+  border-color: #8b5cf6;
 }
 
 /* THE SUBMIT BUTTON */
@@ -453,129 +375,101 @@ THE GRID FOR OUR CARDS */
   width: 100%;
   padding: 14px;
   border: none;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #059669, #10b981); 
-  color: white;
+  border-radius: 8px;
+  background-color: #fafafa; 
+  color: #09090b;
   font-size: 16px;
-  font-weight: bold;
-  /* cursor on hovering : arrow -> pointer */
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
-  margin-top: 10px;
+  transition: background-color 0.2s;
 }
 
 .submit-btn:hover {
-  /* move up by 3px */
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.25);
+  background-color: #e4e4e7;
 } 
 
 /* CARD ACTIONS CONTAINER */
 .card-actions {
-  /* Aligns the buttons in a row */
   display: flex;
-  /* Adds space between the buttons */
-  gap: 10px;
-  /* Padding inside the bottom of the card */
+  gap: 12px;
   padding: 15px;
 }
 
-/* BASE STYLES FOR ALL 3 BUTTONS */
 .view-btn,
 .edit-btn,
 .delete-btn {
-  /* flex: 1 makes all buttons take up equal width */
   flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
   cursor: pointer;
   text-align: center;
-  color: white;
-  font-weight: bold;
-  transition: 0.3s;
+  font-weight: 500;
+  transition: all 0.2s;
   font-size: 0.9rem;
 }
 
-/* SPECIFIC BUTTON COLORS */
 .view-btn {
-  /* Blue gradient */
-  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  background-color: #27272a;
+  color: #fafafa;
 }
-
 .edit-btn {
-  /* Green gradient */
-  background: linear-gradient(135deg, #16a34a, #22c55e);
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10b981;
 }
-
 .delete-btn {
-  /* Red gradient */
-  background: linear-gradient(135deg, #dc2626, #ef4444);
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
 }
 
-/* HOVER EFFECTS FOR ALL 3 BUTTONS */
-.view-btn:hover,
-.edit-btn:hover,
-.delete-btn:hover {
-  /* Lift them slightly */
-  transform: translateY(-2px);
-  /* Make them slightly transparent */
-  opacity: 0.9; 
-}
+.view-btn:hover { background-color: #3f3f46; }
+.edit-btn:hover { background-color: rgba(16, 185, 129, 0.2); }
+.delete-btn:hover { background-color: rgba(239, 68, 68, 0.2); }
 
-
-/* FORM ACTIONS CONTAINER (Holds Submit and Cancel side-by-side) */
+/* FORM ACTIONS CONTAINER */
 .form-actions {
   display: flex;
   gap: 15px;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
-/* Make sure the submit button takes up more space than the cancel button */
 .submit-btn {
   flex: 2; 
-  margin-top: 0; /* Resetting the margin we added previously */
+  margin-top: 0; 
 }
 
-/* CANCEL BUTTON STYLES */
 .cancel-btn {
-  flex: 1; /* Takes up 1 part of the available space */
+  flex: 1; 
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Neutral grey color so it doesn't compete with the primary green button */
-  background: #e2e8f0; 
-  color: #475569;
-  border-radius: 10px;
-  font-weight: bold;
-  transition: 0.3s;
+  background-color: transparent; 
+  border: 1px solid #27272a;
+  color: #a1a1aa;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s;
 }
 
 .cancel-btn:hover {
-  background: #cbd5e1;
-  color: #1e293b;
+  color: #fafafa;
+  border-color: #52525b;
 }
 
-/* BACK LINK IN Shipment DETAILS PAGE */
 .back-link {
   display: inline-block;
   margin-bottom: 20px;
-  color: #2563eb;
-  font-weight: bold;
-  font-size: 1.05rem;
-  transition: 0.3s;
+  color: #a1a1aa;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s;
 }
 
 .back-link:hover {
-  color: #1d4ed8;
-  /* Smoothly slide the arrow a few pixels to the left when hovered! */
-  transform: translateX(-5px); 
+  color: #fafafa;
 }
 
-
 /* --- AUTHENTICATION PAGES --- */
-
-/* Centers the card perfectly in the middle of the screen */
 .auth-container {
   min-height: 75vh;
   display: flex;
@@ -584,71 +478,33 @@ THE GRID FOR OUR CARDS */
   padding: 20px;
 }
 
-/* The white box holding the form */
-.auth-card {
-  width: 100%;
-  max-width: 450px;
-  background: white;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-}
-
-.auth-card h1 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #0f172a;
-  font-size: 1.8rem;
-}
-
-/* Reusing our nice input styles from the CRUD forms */
-.auth-card input {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 18px;
-  border: 2px solid #e2e8f0;
-  border-radius: 10px;
-  font-size: 16px;
-  outline: none;
-  transition: 0.3s;
-}
-
-.auth-card input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.15);
-}
-
-/* Specific Auth Button to look corporate and secure */
 .auth-btn {
   width: 100%;
   padding: 14px;
   border: none;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #1e293b, #0f172a); /* Dark slate/black */
-  color: white;
+  border-radius: 8px;
+  background-color: #8b5cf6; 
+  color: #fafafa;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
-  margin-top: 10px;
+  transition: background-color 0.2s;
 }
 
 .auth-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.3);
+  background-color: #7c3aed;
 }
 
-/* Footer text (the "Login Here" / "Register Here" links) */
 .auth-card p {
   text-align: center;
-  margin-top: 20px;
-  color: #64748b;
+  margin-top: 24px;
+  color: #a1a1aa;
   font-size: 0.95rem;
 }
 
 .auth-card p a {
-  color: #2563eb;
-  font-weight: bold;
+  color: #fafafa;
+  font-weight: 500;
   margin-left: 5px;
 }
 
@@ -656,12 +512,8 @@ THE GRID FOR OUR CARDS */
   text-decoration: underline;
 }
 
-
-/* logout and delete dropdown menu */
 /* --- AVATAR & DROPDOWN STYLES --- */
-
 .user-menu {
-  /* This is crucial! It allows the absolute dropdown to position itself relative to this container */
   position: relative; 
 }
 
@@ -670,114 +522,106 @@ THE GRID FOR OUR CARDS */
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  color: white;
-  font-weight: bold;
-  padding: 5px;
+  color: #fafafa;
+  font-weight: 500;
+  padding: 4px 12px 4px 4px;
   border-radius: 25px;
-  transition: 0.3s;
+  transition: background-color 0.2s;
 }
 
 .user-profile:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background-color: #27272a;
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
-  /* 50% border-radius makes a perfect circle */
+  width: 36px;
+  height: 36px;
   border-radius: 50%; 
-  /* A lighter blue to contrast with the dark navbar */
-  background: #3b82f6; 
+  background-color: #8b5cf6; 
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fafafa;
 }
 
 .username {
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .dropdown {
-  /* Break out of the navbar flow to hover over the page */
   position: absolute;
-  /* Align to the right side of the avatar */
   right: 0; 
-  /* Push it slightly below the navbar */
-  top: 60px; 
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  top: 50px; 
+  background-color: #18181b; 
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.8);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   width: 180px;
-  /* Ensure it sits on top of all other page elements */
   z-index: 100; 
 }
 
 .dropdown-item {
-  padding: 15px 20px;
-  color: #1e293b;
-  /* removes underline which is default for <Link> */
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: bold;
+  padding: 12px 16px;
+  color: #d4d4d8;
+  font-size: 0.9rem;
+  font-weight: 500;
   text-align: left;
   background: none;
   border: none;
   cursor: pointer;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #27272a;
   font-family: inherit;
-  transition: 0.2s;
+  transition: all 0.2s;
 }
 
 .dropdown-item:hover {
-  background: #f8fafc;
-  color: #2563eb;
+  background-color: #27272a;
+  color: #fafafa;
 }
 
-/* Specific styling for the destructive action */
 .delete-text {
-  color: #ef4444; /* Red */
+  color: #ef4444; 
 }
 
 .delete-text:hover {
-  color: #dc2626;
-  background: #fef2f2; /* Very light red background on hover */
+  background-color: rgba(239, 68, 68, 0.1); 
+  color: #ef4444;
 }
 
-
-/* WATCHLIST PIN BUTTONS in `Shipments` page */
+/* WATCHLIST PIN BUTTONS */
 .pin-btn, .pinned-btn {
   width: 100%;
   padding: 10px;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
+  border-radius: 6px;
+  font-weight: 500;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.2s;
+  font-size: 0.9rem;
 }
 
 .pin-btn {
-  background: #f8fafc;
-  color: #0f172a;
-  border: 2px solid #e2e8f0;
+  background-color: transparent;
+  color: #a1a1aa;
+  border: 1px dashed #3f3f46;
 }
 
 .pin-btn:hover {
-  background: #f1f5f9;
-  border-color: #cbd5e1;
+  color: #fafafa;
+  border-color: #52525b;
 }
 
 .pinned-btn {
-  background: #fef3c7;
-  color: #b45309;
-  border: 2px solid #fcd34d;
+  background-color: rgba(245, 158, 11, 0.1); 
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
 .pinned-btn:hover {
-  background: #fde68a;
-  border-color: #fbbf24;
+  background-color: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.3);
 }

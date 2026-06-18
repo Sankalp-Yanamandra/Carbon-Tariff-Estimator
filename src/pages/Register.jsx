@@ -2,6 +2,8 @@ import { useState } from "react";
 import api from "../services/api";
 import { useNavigate, Link } from "react-router-dom";
 
+import { toast } from 'react-toastify';
+
 function Register() {
     // destructure to use useNavigate hook
   const navigate = useNavigate();
@@ -30,11 +32,14 @@ function Register() {
       // Create the user in our mock database :baseurl/users : 2nd enpoint -> http://localhost:3000/users
       await api.post("/users", user);
         //inform user of successful registration   
-      alert(`Corporate Account using email ${user.email} Created! Please log in to use our TOOL.`);
+
+      toast.success(`Account for ${user.email} created! Please log in.`);
       // auto navigate : Send them to the login page
       navigate("/login");
 
     } catch (error) {
+        // send alert to user
+        toast.error("Registration failed. Please try again.");
         console.log("Registration failed due to : ", error);
     }
   }

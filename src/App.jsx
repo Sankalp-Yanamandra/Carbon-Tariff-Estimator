@@ -1,6 +1,12 @@
 import Navbar from "./components/Navbar";
 import AppRoutes from "./routes/AppRoutes";
 
+// 1. Import the Toast Container and both CSS files
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// Global CSS for the modal : alternative to windows.confirm() for Delete Account option.
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
+
 function App() {
   return (
     <>
@@ -13,6 +19,12 @@ function App() {
        */}
       <main>
         <AppRoutes />
+        
+        <ToastContainer 
+        position="bottom-right" 
+        autoClose={3000} 
+        theme="colored" 
+      />
       </main>
     </>
   );

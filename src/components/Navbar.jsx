@@ -6,6 +6,9 @@ import api from "../services/api";
 
 import { useSelector } from "react-redux";
 
+import { confirmAlert } from "react-confirm-alert";
+import { toast } from "react-toastify";
+
 function Navbar() {
 
   const navigate = useNavigate();
@@ -20,32 +23,50 @@ function Navbar() {
   // get watchlist data from the store
   const watchlist = useSelector((state) => state.watchlist);
 
-  // Function to handle deleting the account
-  async function handleDeleteAccount() {
-    // Always confirm before a destructive action
-    const confirmDelete = window.confirm("Are you sure you want to permanently delete your corporate account?");
+// Function to handle deleting the account
+  function handleDeleteAccount() {
+    // 1. Launch the custom modal
+    confirmAlert({
+      title: 'Confirm Account Deletion',
+      message: 'Are you sure you want to permanently delete your corporate account? This action cannot be undone.',
+      buttons: [
+        {
+          label: 'Yes, Delete It',
+          // 2. If they click yes, we run your EXACT asynchronous logic!
+          onClick: async () => {
+            // only for logged in user
+            if (user) {
+              try {
+                // Delete the user from the JSON database
+                await api.delete(`/users/${user.id}`);
+                
+                // Clear local storage
+                localStorage.removeItem("user");
+                
+                // Show the success toast
+                toast.success(`Corporate Account deleted successfully. Sorry to see you go.`); 
 
-    // if user logged in and confirms deleteting the account
-    if (confirmDelete && user) {
-      try {
-        // 1. Delete the user from the JSON database
-        await api.delete(`/users/${user.id}`);
-        
-        // 2. Clear local storage
-        localStorage.removeItem("user");
-        
-        alert("Corporate Account Deleted Successfully.");
-        
-        // 3. redirect to the registration page and refresh
-        navigate("/register");
-        window.location.reload();
+                // Wait 2 seconds, then redirect and refresh
+                setTimeout(() => {
+                    navigate("/register");
+                    window.location.reload();
+                }, 2000);
 
-      } catch (error) {
-        console.log("Error deleting account:", error);
-      }
-    }
+              } catch (error) {
+                toast.error("Couldn't delete the account.");
+                console.log("Error deleting account:", error);
+              }
+            }
+          }
+        },
+        {
+          label: 'Cancel',
+          // If they click cancel, the modal simply closes and does nothing.
+          onClick: () => {} 
+        }
+      ]
+    });
   }
-
 
   return (
     <nav>

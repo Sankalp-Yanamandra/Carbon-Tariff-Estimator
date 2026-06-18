@@ -3,6 +3,7 @@ import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function AddShipment() {
     // destructure for using useNavigate() hook
@@ -85,12 +86,13 @@ function AddShipment() {
       console.log(formData)
 
      // an alert sent to user to inform about the ADDITION
-     alert(`Custom ${formData.transportMode} route from ${formData.origin} to ${formData.destination} has been drafted successfully.`)
+      toast.success(`Custom ${formData.transportMode} route from ${formData.origin} to ${formData.destination} has been drafted successfully.`)
 
       // as soon as POST request sent automatically navigate back to Shipments page
       navigate("/shipments");
 
     } catch (error) {
+      toast.warning('Draft Failed');
       console.log("Failed to add shipment due to : ", error);
     }
   }

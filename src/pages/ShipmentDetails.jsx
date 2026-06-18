@@ -3,6 +3,13 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
+// Import the specific spinner component you want to use
+import { Oval } from "react-loader-spinner";
+
+
+
 
 function ShipmentDetails() {
 
@@ -26,15 +33,32 @@ function ShipmentDetails() {
       // save fettched data into the state 'route'
       setRoute(response.data);
     } catch (error) {
+      toast.warning('Failed fetching route details')
       console.log("Error fetching route details : ", error);
     }
   }
 
   // render loading state until the data arrives from the API
-  if (!route) {
-    return <h2>Calculating Emissions...</h2>;
+if (!route) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "100px" }}>
+        <Oval
+          height={80}
+          width={80}
+          color="#3b82f6"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel='oval-loading'
+          secondaryColor="#bfdbfe"
+          strokeWidth={4}
+          strokeWidthSecondary={4}
+        />
+        <h2 style={{ marginTop: "20px", color: "#475569" }}>Calculating Emissions & Tariffs...</h2>
+      </div>
+    );
   }
-
+  
   //handling image loading issue
   const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1494412651409-8963ce7935a7"; // Reliable sea freight image 
 
