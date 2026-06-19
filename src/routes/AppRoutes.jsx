@@ -16,6 +16,8 @@ import ProtectedRoute from './ProtectedRoute';
 
 import Watchlist from '../pages/Watchlist';
 
+import Sandbox from '../pages/Sandbox';
+
 function AppRoutes() {
   return (
     <Routes>
@@ -23,7 +25,7 @@ function AppRoutes() {
       <Route path="/shipments" element={<Shipments />} />
       <Route path="/shipments/:id" element={<ShipmentDetails />} />
       
-      {/* Add, Edit, Watchlist features only available after logging in */}
+      {/* Add, Edit, Watchlist, Sandbox simulator features only available after logging in */}
       <Route path="/add-shipment" element={
         <ProtectedRoute>
           <AddShipment />
@@ -44,6 +46,15 @@ function AppRoutes() {
           </ProtectedRoute>
         } 
       />
+
+      <Route
+      path="/sandbox" 
+      element={
+      <ProtectedRoute>
+        <Sandbox />
+      </ProtectedRoute>
+      }
+       />
 
 
       <Route path="/register" element={<Register />} />

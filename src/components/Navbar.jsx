@@ -9,6 +9,10 @@ import { useSelector } from "react-redux";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 
+// icon for simulator
+import { FaRoute, FaLock } from "react-icons/fa";
+
+
 function Navbar() {
 
   const navigate = useNavigate();
@@ -68,6 +72,18 @@ function Navbar() {
     });
   }
 
+  // for simulator link
+  const handleSimulatorClick = (clickevent) => {
+    // if not logged in
+    if (!user) {
+      clickevent.preventDefault(); // Stop the link from working
+      toast.info('Login first, to use this exciting feature')
+      navigate("/login"); // Force them to the login page
+    }
+  };
+
+
+
   return (
     <nav>
       {/* ii. navbar component : instead of <a> anchor tag using <Link> tag to ensure no page reloading, 
@@ -88,6 +104,21 @@ function Navbar() {
             </Link>
           )}
 
+          {/* simulator feature only for logged in users */}
+          <Link 
+          to="/sandbox" 
+          onClick={handleSimulatorClick}
+          style={{ 
+            display: "flex", 
+            alignItems: "center", 
+            gap: "6px",
+            color: user ? "#fafafa" : "#a1a1aa", // Dim it if they are logged out
+            opacity: user ? 1 : 0.7 
+          }}
+        >
+        <FaRoute /> Simulator
+        {!user && <FaLock style={{ fontSize: "0.8rem", color: "#f43f5e", marginLeft: "4px" }} />}
+        </Link>
 
       </div>
 

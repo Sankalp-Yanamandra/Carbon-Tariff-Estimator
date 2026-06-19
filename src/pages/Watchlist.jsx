@@ -3,7 +3,7 @@ import { unpinRoute } from "../features/watchlistSlice";
 import { Link } from "react-router-dom";
 
 // importing svg icons
-import { FaTruck, FaPlane, FaShip, FaWeightHanging, FaCloud, FaEuroSign } from "react-icons/fa";
+import { FaTruck, FaPlane, FaShip, FaWeightHanging, FaCloud, FaEuroSign, FaArrowUp } from "react-icons/fa";
 
 function Watchlist() {
     // Destructure for using hook
@@ -22,6 +22,8 @@ const getTransportIcon = (mode) => {
     return <FaShip style={{ marginRight: "8px", color: "#64748b" }} />;
   };
 
+  // Scroll to Top Function
+  const ScrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <>
@@ -100,6 +102,22 @@ const getTransportIcon = (mode) => {
           ))}
         </div>
       )}
+
+      {/* back to top button */}
+      {pinnedRoutes.length > 0 && (
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "40px", paddingBottom: "40px" }}>
+          <button 
+            onClick={ScrollToTop}
+            style={{ background: "transparent", color: "#a1a1aa", border: "1px solid #3f3f46", padding: "8px 20px", borderRadius: "20px", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px", fontWeight: "600", transition: "all 0.2s ease" }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = "#8b5cf6"; e.currentTarget.style.borderColor = "#8b5cf6"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = "#a1a1aa"; e.currentTarget.style.borderColor = "#3f3f46"; }}
+          >
+            <FaArrowUp /> Back to Top
+          </button>
+        </div>
+      )}
+
+
     </>
   );
 }

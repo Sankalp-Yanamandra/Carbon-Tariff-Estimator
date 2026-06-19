@@ -20,32 +20,50 @@ a {
 
 /* NAVBAR STYLES */
 nav {
-  background-color: #09090b; /* Blends seamlessly with body */
-  padding: 20px 40px;
+  background-color: #09090b;
+  padding: 20px 4vw; /* Uses viewport width so it breathes on large screens */
   display: flex;
-  gap: 25px;
   align-items: center;
-  border-bottom: 1px solid #27272a; /* Sharp, high-contrast border */
-  justify-content: space-between; 
+  justify-content: space-between;
+  border-bottom: 1px solid #27272a;
 }
 
-.nav-left, 
+/* The left section containing the main links */
+.nav-left {
+  display: flex;
+  flex: 1; /* Forces this container to swallow all empty middle space */
+  justify-content: space-evenly; /* Spreads the links perfectly across that space */
+  align-items: center;
+  margin-right: 40px; /* Prevents it from colliding with the right menu */
+}
+
+/* The right section containing auth/profile */
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 25px;
+  justify-content: flex-end;
+  gap: 15px; 
+  min-width: fit-content;
 }
 
-nav > .nav-left > a, nav > .nav-right > a {
-  color: #a1a1aa; /* Muted grey for inactive links */
-  font-weight: 500;
-  transition: color 0.2s;
+/* Upgraded Links (Bigger, Bolder, Larger Hit Area) */
+.nav-left > a,
+.nav-right > a {
+  color: #a1a1aa;
+  font-weight: 600; /* Bolder text */
+  font-size: 1.15rem; /* Larger font size */
+  padding: 12px 24px; /* Massive padding to fill out the bar */
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  white-space: nowrap; /* Prevents text from wrapping on smaller screens */
 }
 
-nav > a:hover {
-  color: #fafafa; /* Bright white on hover */
+/* New Hover State */
+.nav-left > a:hover,
+.nav-right > a:hover {
+  color: #fafafa;
+  background: rgba(255, 255, 255, 0.05); /* Sleek translucent hover box */
 }
-
 /* MAIN CONTENT CONTAINER */
 main {
   width: 90%;
@@ -534,22 +552,22 @@ h1, h2, h3 {
 }
 
 .avatar {
-  width: 36px;
-  height: 36px;
+  width: 42px; /* Increased from 36px */
+  height: 42px; /* Increased from 36px */
   border-radius: 50%; 
   background-color: #8b5cf6; 
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.2rem; /* Increased font size */
   font-weight: bold;
   color: #fafafa;
 }
 
 .username {
-  font-size: 0.95rem;
+  font-size: 1.1rem; /* Increased to match navbar links */
+  font-weight: 600;
 }
-
 .dropdown {
   position: absolute;
   right: 0; 
@@ -710,4 +728,34 @@ input[type="password"]::-ms-clear {
 /* Optional: Add a slight hover effect to the eye icon */
 input[type="password"]::-ms-reveal:hover {
   opacity: 0.8;
+}
+
+
+/* Custom Hover Effect for Hotspot Cards on Home page*/
+.hotspot-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.hotspot-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15); /* Subtle purple glow */
+  border-color: #3f3f46;
+}
+
+
+/* Sleek, dark tooltips for the LIGHT map */
+.leaflet-tooltip.custom-tooltip {
+  background-color: #18181b; /* Dark zinc background */
+  border: 1px solid #3f3f46;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  color: #fafafa; /* White text */
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+/* Hide the little tooltip triangle */
+.leaflet-tooltip.custom-tooltip::before {
+  display: none; 
 }

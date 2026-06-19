@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { Oval } from "react-loader-spinner";
 
 
+import { FaRoute, FaLock, FaArrowUp } from "react-icons/fa";
 
 function Shipments() {
   // states to store route data
@@ -18,7 +19,6 @@ function Shipments() {
 
 // 2. Add a loading state, defaulting to true
   const [isLoading, setIsLoading] = useState(true);
-
 
   // states to store user's choices for filters
   const [search, setSearch] = useState("");
@@ -131,6 +131,9 @@ function Shipments() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const nextPage = () => setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev));
   const prevPage = () => setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
+
+  // Scroll to Top Function
+  const ScrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
 
   // 4. Render the spinner if we are still loading data
@@ -300,6 +303,18 @@ function Shipments() {
           
         </div>
       )}
+
+      {/* back to top button */}
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", paddingBottom: "40px" }}>
+        <button 
+          onClick={ScrollToTop}
+          style={{ background: "transparent", color: "#a1a1aa", border: "1px solid #3f3f46", padding: "8px 20px", borderRadius: "20px", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px", fontWeight: "600", transition: "all 0.2s ease" }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = "#8b5cf6"; e.currentTarget.style.borderColor = "#8b5cf6"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = "#a1a1aa"; e.currentTarget.style.borderColor = "#3f3f46"; }}
+        >
+          <FaArrowUp /> Back to Top
+        </button>
+      </div>
 
 
     </>
