@@ -39,6 +39,12 @@ function Home() {
             you must pay a tax (tariff) equivalent to the carbon pollution created during production and transport.
           </p>
           <p>
+            Carbon leakage occurs when companies based in the EU move carbon-intensive production abroad to countries where less stringent climate policies are in place than in the EU, or when EU products get replaced by more carbon-intensive imports. 
+            CBAM is a system to confirm that a price has been paid for the embedded carbon emissions generated in the production of certain goods imported into the EU. This ensures that: 
+            the carbon price of imports is equivalent to the carbon price of domestic production;
+            the EU's and non-EU countries (eg. India's , China's) climate objectives are not undermined.
+          </p>
+          <p>
             Our tool helps you visualize these hidden geopolitical costs before your cargo ever leaves the port.
           </p>
         </div>
