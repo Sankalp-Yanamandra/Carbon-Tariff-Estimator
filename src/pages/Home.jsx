@@ -32,20 +32,27 @@ function Home() {
       {/* SECTION 2: The Explanation */}
       <section id = "cbam-info" className="info-section">
         <h2>What is the Carbon Tariff?</h2>
+        
         <div className="info-content">
+          <h4>AIM : prevent Carbon Leakage</h4>
           <p>
             The European Union's <strong>Carbon Border Adjustment Mechanism (CBAM)</strong> levels the playing field. 
             If you manufacture goods in a country with low environmental regulations and export them to the EU, 
             you must pay a tax (tariff) equivalent to the carbon pollution created during production and transport.
           </p>
           <p>
-            Carbon leakage occurs when companies based in the EU move carbon-intensive production abroad to countries where less stringent climate policies are in place than in the EU, or when EU products get replaced by more carbon-intensive imports. 
-            CBAM is a system to confirm that a price has been paid for the embedded carbon emissions generated in the production of certain goods imported into the EU. This ensures that: 
-            the carbon price of imports is equivalent to the carbon price of domestic production;
-            the EU's and non-EU countries (eg. India's , China's) climate objectives are not undermined.
+            <strong>Carbon leakage</strong> occurs when companies based in the EU move carbon-intensive production abroad to countries where less stringent climate policies are in place than in the EU, or when EU products get replaced by more carbon-intensive imports. 
+            <br /><br />
+            <strong>Carbon Border Adjustment Mechanism (CBAM)</strong> is a system to confirm that a price has been paid for the embedded carbon emissions generated in the production of certain goods imported into the EU. 
+            <br /><br />
+            This ensures that:
+            <ul> 
+            <li>the carbon price of imports is equivalent to the carbon price of domestic production;</li>
+            <li>the EU's and non-EU countries (eg. India's , China's) climate objectives are not undermined.</li>
+            </ul>
           </p>
           <p>
-            Our tool helps you visualize these hidden geopolitical costs before your cargo ever leaves the port.
+            <strong>Our tool helps businesses visualize and manage these hidden geopolitical costs before their cargo ever leaves the port.</strong>
           </p>
         </div>
       </section>
