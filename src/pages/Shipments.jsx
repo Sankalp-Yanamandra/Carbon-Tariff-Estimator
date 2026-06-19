@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 // 1. Import the spinner
 import { Oval } from "react-loader-spinner";
 
+
+
 function Shipments() {
   // states to store route data
   const [routes, setRoutes] = useState([]);
@@ -27,10 +29,24 @@ function Shipments() {
   const [sort, setSort] = useState("");
 
 
+  // PAGINATION
+  // states to track pages, intially on pg-1
+  const [currentPage, setCurrentPage] = useState(1);
+  //  6 cards per page
+  const routesPerPage = 6; 
+
+
+
   // Fetch the data as soon as the page loads i.e. ONly Once
   useEffect(() => {
     getRoutes();
   }, []);
+
+  // If the user types in the search bar or changes a filter, 
+  // bring them to Page 1, otherwise they might see a blank screen!
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, category, transportMode, sort]);
 
   async function getRoutes() {
     try {
@@ -101,6 +117,20 @@ function Shipments() {
   }
 
 
+  // Find the exact slice of the array we need for the current page
+  const indexOfLastRoute = currentPage * routesPerPage;
+  const indexOfFirstRoute = indexOfLastRoute - routesPerPage;
+  
+  //  small array containing ONLY the routes for the current page slice(a,b) : [a,b)
+  const currentRoutes = finalRoutes.slice(indexOfFirstRoute, indexOfLastRoute);
+  
+  // Calculate total pages needed
+  const totalPages = Math.ceil(finalRoutes.length / routesPerPage);
+
+  // Pagination Handlers
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const nextPage = () => setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev));
+  const prevPage = () => setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
 
 
   // 4. Render the spinner if we are still loading data
@@ -200,9 +230,9 @@ function Shipments() {
 
 
       <div className="destinations">
-        {finalRoutes.length > 0 ? (
+        {currentRoutes.length > 0 ? (
           // Loop through our data and create a card for each route
-          finalRoutes.map((route) => (
+          currentRoutes.map((route) => (
             // pass route data and delete fn as props to RouteCard
             <RouteCard key={route.id} route={route} onDelete={deleteRoute} />
           ))
@@ -217,6 +247,61 @@ function Shipments() {
         )}
 
       </div>
+
+      {/* UI for page switching */}
+      {/* render this only if more than 1 pg */}
+      {totalPages > 1 && (
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px", marginTop: "40px", paddingBottom: "40px" }}>
+          
+          {/* go to prev page button */}
+          <button 
+            onClick={prevPage} 
+            // disable this button if on pg 1(since can't go back more)
+            disabled={currentPage === 1}
+            style={{ padding: "8px 16px", borderRadius: "6px", border: "1px solid #27272a", background: currentPage === 1 ? "transparent" : "#27272a", color: currentPage === 1 ? "#52525b" : "#fafafa", cursor: currentPage === 1 ? "not-allowed" : "pointer" }}
+          >
+            Prev
+          </button>
+
+          {/* Dynamically create a button for every page number */}
+          {/* create an empty array of size : total pages, in map() : we aren't req items, just req index .*/}
+          {[...Array(totalPages)].map((_, index) => (
+
+            // button to go to prev page
+            <button
+              // unique key for react 
+              key={index + 1}
+              // since index start at 0 so index + 1, onclick we set current pg number : state `currentPage`
+              onClick={() => paginate(index + 1)}
+              style={{
+                padding: "8px 14px",
+                borderRadius: "6px",
+                border: "1px solid",
+                borderColor: currentPage === index + 1 ? "#8b5cf6" : "#27272a",
+                background: currentPage === index + 1 ? "rgba(139, 92, 246, 0.1)" : "transparent",
+                color: currentPage === index + 1 ? "#8b5cf6" : "#a1a1aa",
+                fontWeight: currentPage === index + 1 ? "bold" : "normal",
+                cursor: "pointer"
+              }}
+            >
+              {index + 1}
+            </button>
+          ))}
+
+          {/* button to go to next page */}
+          <button 
+            onClick={nextPage}
+            // if on last page, diasable the button (since can't go any further) 
+            disabled={currentPage === totalPages}
+            style={{ padding: "8px 16px", borderRadius: "6px", border: "1px solid #27272a", background: currentPage === totalPages ? "transparent" : "#27272a", color: currentPage === totalPages ? "#52525b" : "#fafafa", cursor: currentPage === totalPages ? "not-allowed" : "pointer" }}
+          >
+            Next
+          </button>
+          
+        </div>
+      )}
+
+
     </>
   );
 }
