@@ -93,6 +93,20 @@ const getTransportIcon = (mode) => {
         {/* view feature available to all */}
         <Link className="view-btn" to={`/shipments/${route.id}`}>View Route Details</Link>
 
+        {user && (
+          <>
+            <Link className="edit-btn" to={`/edit-shipment/${route.id}`}>Edit Route Details</Link>
+            <button 
+              className="delete-btn" 
+              onClick={() => onDelete(route.id, route.transportMode, route.origin, route.destination)}
+            >
+              Delete Route
+            </button>
+          </>
+        )}
+      </div>
+
+
 
         {/* edit, delete, pin feature only for logged in users : conditional rendering */}
         <div style={{ padding: "0 15px 15px 15px" }}>
@@ -119,11 +133,9 @@ const getTransportIcon = (mode) => {
             >
               ⭐ Pin to Watchlist
             </button>
-            
           )}
           </div>
       </div>
-  </div>
   );
 }
 

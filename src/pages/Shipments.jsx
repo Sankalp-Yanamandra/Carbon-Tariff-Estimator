@@ -18,6 +18,15 @@ function Shipments() {
   const [isLoading, setIsLoading] = useState(true);
 
 
+  // states to store user's choices for filters
+  const [search, setSearch] = useState("");
+  // initially filtered by All Categories
+  const [category, setCategory] = useState("All");
+  // initially filtered by All modes of transport
+  const [transportMode, setTransportMode] = useState("All");
+  const [sort, setSort] = useState("");
+
+
   // Fetch the data as soon as the page loads i.e. ONly Once
   useEffect(() => {
     getRoutes();
@@ -60,6 +69,39 @@ function Shipments() {
       console.log(`Error deleting Route ID : ${route_id} due to : ${error}`)
     }
   }
+
+
+  // applying filter logic for search states
+  const filteredRoutes = routes.filter((route) => {
+    // match search based on origin/destination
+    const searchMatch = 
+      // convert search text by user to lowercase for `CASE-INSENSITIVITY`
+      route.origin.toLowerCase().includes(search.toLowerCase()) || 
+      route.destination.toLowerCase().includes(search.toLowerCase());
+
+    // if no category given, filter by 'ALl' else filter by category given
+    const categoryMatch = category === "All" || route.productCategory === category;
+
+    // if no mode given, filter by 'ALl' else filter by mode given
+    const modeMatch = transportMode === "All" || route.transportMode === transportMode;
+
+    // filter cond : must match each of search AND category AND mode given by user
+    return searchMatch && categoryMatch && modeMatch;
+  });
+
+  // sorting logic
+  // get the updated filtered array data, on which apply the sort logic [to get results based on both search n sort] 
+  let finalRoutes = [...filteredRoutes];
+    if (sort === "high-co2") {
+    // Sort High to Low by Emissions
+    finalRoutes.sort((a, b) => parseFloat(b.emissionsKg) - parseFloat(a.emissionsKg));
+  } else if (sort === "low-co2") {
+    // Sort Low to High by Emissions
+    finalRoutes.sort((a, b) => parseFloat(a.emissionsKg) - parseFloat(b.emissionsKg));
+  }
+
+
+
 
   // 4. Render the spinner if we are still loading data
   if (isLoading) {
@@ -116,14 +158,64 @@ function Shipments() {
         </div>
       )}
 
+      {/* form for search n sort filters */}
+      <div className="filters" style={{ display: "flex", gap: "15px", flexWrap: "wrap", marginBottom: "30px" }}>
+
+
+        <input 
+          type="text" 
+          placeholder="Search Origin or Destination..." 
+          value={search} 
+          onChange={(e) => setSearch(e.target.value)} 
+          style={{ flex: 1, minWidth: "200px", padding: "12px", borderRadius: "8px", border: "1px solid #27272a", background: "#09090b", color: "#fafafa" }}
+        />
+
+        <select value={category} onChange={(e) => setCategory(e.target.value)} style={{ padding: "12px", borderRadius: "8px", border: "1px solid #27272a", background: "#09090b", color: "#fafafa" }}>
+          <option value="All">All Categories</option>
+          <option value="Aluminum/Steel">Aluminum/Steel</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Cement/Fertilizer">Cement/Fertilizer</option>
+        </select>
+
+        <select value={transportMode} onChange={(e) => setTransportMode(e.target.value)} style={{ padding: "12px", borderRadius: "8px", border: "1px solid #27272a", background: "#09090b", color: "#fafafa" }}>
+          <option value="All">All Modes</option>
+          <option value="Sea Freight">Sea Freight</option>
+          <option value="Air Freight">Air Freight</option>
+          <option value="Truck">Truck</option>
+        </select>
+
+        <select value={sort} onChange={(e) => setSort(e.target.value)} style={{ padding: "12px", borderRadius: "8px", border: "1px solid #27272a", background: "#09090b", color: "#fafafa" }}>
+          <option value="">Sort by Impact</option>
+          <option value="high-co2">Emissions: High to Low</option>
+          <option value="low-co2">Emissions: Low to High</option>
+        </select>
+
+
+      </div>
+
+
+      {/* rendering final destinations after applying sorted and searched filters :
+       conditional rendering,
+      to ensure map() doesnt fail if no data exists.*/}
 
 
       <div className="destinations">
-        {/* Loop through our data and create a card for each route */}
-        {routes.map((route) => (
-          // pass route data and delete fn as props to RouteCard
-          <RouteCard key={route.id} route={route} onDelete={deleteRoute}/>
-        ))}
+        {finalRoutes.length > 0 ? (
+          // Loop through our data and create a card for each route
+          finalRoutes.map((route) => (
+            // pass route data and delete fn as props to RouteCard
+            <RouteCard key={route.id} route={route} onDelete={deleteRoute} />
+          ))
+        ) : 
+          // if no data, show a message accordingly.
+        (
+          // gridColumn: "1 / -1" : gridcolstart = 1(at 1st grid line) and gridend : -1(at last grid line)
+          // h3 element will span the entire width of the grid
+          <h3 style={{ color: "#a1a1aa", gridColumn: "1 / -1", textAlign: "center", marginTop: "20px" }}>
+            No routes match your search criteria.
+          </h3>
+        )}
+
       </div>
     </>
   );
