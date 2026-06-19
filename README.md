@@ -391,7 +391,9 @@ npm install
 **Start the Backend API(Terminal 1)**
 ```bash
 # (ensure the baseURL in src/services/api.js is set to your localhost port rather than the production Render URL).
-npm start
+npm start 
+# if this doesn't work, then try :
+json-server --watch db.json
 ```
 
 **Start the Frontend Vite Server(Terminal 2)**
