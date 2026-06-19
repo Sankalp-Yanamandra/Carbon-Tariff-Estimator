@@ -1,6 +1,14 @@
-# CARBON OFFSET & TARIFF ESTIMATOR
+# 🌍 CARBON OFFSET & TARIFF ESTIMATOR
 
-An Application built to help e-commerce businesses to calculate supply chain emissions and projected Carbon Border Adjustment Mechanism (CBAM) tariffs.
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)
+![Render](https://img.shields.io/badge/Render-%2346E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
+
+
+An full-stack React Application built to help e-commerce businesses to track global supply chain routes, estimate carbon emissions, and calculate Carbon Border Adjustment Mechanism (CBAM) tariffs.
+
 
 <!-- short explanation of these terms -->
 <details>
@@ -17,12 +25,28 @@ An Application built to help e-commerce businesses to calculate supply chain emi
 - [What is a Carbon Border Adjustment Mechanism? (Brookings)](https://www.brookings.edu/articles/what-is-a-carbon-border-adjustment-mechanism/)
 </details>
 
+### 🔗 Live Links
+* 🖥️ Frontend (Netlify): [Try it Out](https://tariff-estimator.netlify.app/)
+
+* ⚙️ Backend API (Render): [users](https://logistics-api-k0wx.onrender.com/users)
+[routes](https://logistics-api-k0wx.onrender.com/routes)
+
+
+## ✨ Core Features
+
+* **Data Management:** Complete CRUD operations for drafting, editing, and deleting global shipping routes.
+* **Data Sorting & Filtering:** Real-time search by origin/destination, categorical dropdown filters (Transport Mode, Product Category), and sorting by CO2 impact.
+* **Enterprise UI/UX:** Features a high-contrast OLED Dark Theme, asynchronous loading states (`react-loader-spinner`), scalable vector iconography (`react-icons`), and non-blocking toast notifications (`react-toastify`).
+* **State Management:** Utilizes **Redux Toolkit** for complex global state architecture, seamlessly synced with browser `localStorage` for permanent Watchlist pinning across sessions.
+* **Security & Routing:** Implements strict Route Guarding (`ProtectedRoute`) and feature-discovery teardowns, ensuring unauthenticated users cannot access destructive actions or sensitive dashboards.
+* **Optimized Rendering:** Implements frontend pagination to ensure browser performance and stability when handling massive JSON data arrays.
+
 <!-- Global Tech stack used -->
-## 🛠️ Tools Used : 
-- React-js 
-- Vite
-- React-Router
-- Redux Toolkit
+## 🛠️ Technical Architecture : 
+**Frontend:**
+- React-js via Vite
+- React-Router-DOM : for SPA navigation
+- Redux Toolkit : for global state management (avoid `prop drilling` )
 - React-Redux Library : connects React with Redux(toolkit)
 - react-toastify Library : alernatives `alert()` popups
 - react-confirm-alert  library : alernative to `windows.confirm()`.
@@ -30,10 +54,13 @@ An Application built to help e-commerce businesses to calculate supply chain emi
 - react-icons Library : for Operating System independant SVG icons.
 - Axios JavaScript Library : to call REST API from components.
 - REST API
-- JSON-server
 - JSX
 - JS-ES6+
 - CSS (flex, grid)
+
+**Backend:**
+- JSON-server
+- Node.js : (cloud hoisting for Node.js API environment)
 
 
 <!-- Phase 1-->
@@ -187,153 +214,187 @@ An Application built to help e-commerce businesses to calculate supply chain emi
     ```
 
 ## Phase 4 : Global State Management (Redux Toolkit)
-- create a central vault for states : `store` that eliminates the issue of `props drilling` using `Redux Toolkit`.
-```javascript
-export const store = configureStore({
-    // fn(s) to manipulate states globally
-  reducer: {
-    // We register our specific "department" (slice) in the store : watchlist (name must match the name defined in the slice)
-    favorites: favoritesReducer,
-  },
-})
-
-```
-- terminologies : 
-    1. `Slice` : dept/feature
-    2. `state`: dynamic variable whose change in value driggers react component re-render
-    3. `reducer` : fn to manipulate `state` globally(similar to react's `setState()`)
-    4. `action type`: which reducer fn called
-    5. `action payload` : data sent by user.
-    6. `store` : vault where all states exist and stored.
-
-- create `Slice` for `routes considered critical by the user`
-```javascript
-export const watchlistSlice = createSlice({
-    // this name would be used by useDispatch (send data to store): to update state value
-  name: "watchlist",
-  
-  // The initial state is just an empty array (no pinned routes yet)
-  initialState: [],
-  
-  // Reducers are the "Bank Tellers" - the functions that actually change the data (similar to setstate() in react)
-  reducers: {
-    
-    // Action 1: Pinning a route to the watchlist
-    pinRoute: (state, action) => {
-      // 'action.payload' is the entire route object we click on to save (payload : data sent by user)
-      const newRoute = action.payload;
-
-      // Look through our current state to see if this EXACT route already exists (checking for duplicates) using find() : returns true/false
-      const exists = state.find((route) => route.id === newRoute.id);
-
-      // if not a duplicate, then save to the state   
-      if (!exists) {
-        // use .push() to safely add the item
-        state.push(newRoute); 
-      } else {
-        // If its duplicate don't save , alert the user 
-        alert("This specific route is already pinned to your Watchlist!");
-      }
+- 🔍 Concepts Used :
+  - create a central vault for states : `store` that eliminates the issue of `props drilling` using `Redux Toolkit`.
+  ```javascript
+  export const store = configureStore({
+      // fn(s) to manipulate states globally
+    reducer: {
+      // We register our specific "department" (slice) in the store : watchlist (name must match the name defined in the slice)
+      favorites: favoritesReducer,
     },
+  })
 
-    // Action 2: Unpinning a route
-    unpinRoute: (state, action) => {
-      // 'action.payload' will be the ID of the route we want to remove
-      // filter() : to dynamically update the watchlist [] by ignoring routes we want to unpin
-      return state.filter((route) => {
-        return route.id !== action.payload
-      });
+  ```
+  - terminologies : 
+      1. `Slice` : dept/feature
+      2. `state`: dynamic variable whose change in value driggers react component re-render
+      3. `reducer` : fn to manipulate `state` globally(similar to react's `setState()`)
+      4. `action type`: which reducer fn called
+      5. `action payload` : data sent by user.
+      6. `store` : vault where all states exist and stored.
+
+  - create `Slice` for `routes considered critical by the user`
+  ```javascript
+  export const watchlistSlice = createSlice({
+      // this name would be used by useDispatch (send data to store): to update state value
+    name: "watchlist",
+    
+    // The initial state is just an empty array (no pinned routes yet)
+    initialState: [],
+    
+    // Reducers are the "Bank Tellers" - the functions that actually change the data (similar to setstate() in react)
+    reducers: {
+      
+      // Action 1: Pinning a route to the watchlist
+      pinRoute: (state, action) => {
+        // 'action.payload' is the entire route object we click on to save (payload : data sent by user)
+        const newRoute = action.payload;
+
+        // Look through our current state to see if this EXACT route already exists (checking for duplicates) using find() : returns true/false
+        const exists = state.find((route) => route.id === newRoute.id);
+
+        // if not a duplicate, then save to the state   
+        if (!exists) {
+          // use .push() to safely add the item
+          state.push(newRoute); 
+        } else {
+          // If its duplicate don't save , alert the user 
+          alert("This specific route is already pinned to your Watchlist!");
+        }
+      },
+
+      // Action 2: Unpinning a route
+      unpinRoute: (state, action) => {
+        // 'action.payload' will be the ID of the route we want to remove
+        // filter() : to dynamically update the watchlist [] by ignoring routes we want to unpin
+        return state.filter((route) => {
+          return route.id !== action.payload
+        });
+      }
+  ```
+
+  - connected `react` with `redux toolkit` using `react-redux` library, also used hooks provided by this library:
+      1. `useSelector()` hook : to get data from the `store`.
+      2. `useDispatch()` hook : to send data to the `store`.
+  ```javascript
+    // wrap entire App inside Provider(react-redux connects react with redux) : so the Store(global vault with various depts -Slices) 
+    // available[Read/Write access to Store's Slice's States] to all components
+    // inside the App.jsx
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+
+    // 1. Initialize Redux dispatcher
+    const dispatch = useDispatch();
+
+    // 2. Read the current watchlist from the Redux Vault
+    const watchlist = useSelector((state) => state.watchlist);
+
+    // 3. Check if THIS specific route is already inside the watchlist
+    const isPinned = watchlist.some((item) => item.id === route.id);
+
+      function handlePin() {
+      // send complete route obj to store
+      dispatch(pinRoute(route));
     }
-```
 
-- connected `react` with `redux toolkit` using `react-redux` library, also used hooks provided by this library:
-    1. `useSelector()` hook : to get data from the `store`.
-    2. `useDispatch()` hook : to send data to the `store`.
-```javascript
-  // wrap entire App inside Provider(react-redux connects react with redux) : so the Store(global vault with various depts -Slices) 
-  // available[Read/Write access to Store's Slice's States] to all components
-  // inside the App.jsx
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
-
-  // 1. Initialize Redux dispatcher
-  const dispatch = useDispatch();
-
-  // 2. Read the current watchlist from the Redux Vault
-  const watchlist = useSelector((state) => state.watchlist);
-
-  // 3. Check if THIS specific route is already inside the watchlist
-  const isPinned = watchlist.some((item) => item.id === route.id);
-
-    function handlePin() {
-    // send complete route obj to store
-    dispatch(pinRoute(route));
-  }
-
-    function handleUnpin() {
-    // send to route id to store for unpinning
-    dispatch(unpinRoute(route.id));
-  }
-```
-- Implemented dynamic History Navigation (`useNavigate(-1)`) in `ShipmentDetails.jsx` to allow user to go back to immediately visited page(`Shipment.jsx` or `Watchlist.jsx`) to maintain user's flow.[in place of `<Link>` tag.]
+      function handleUnpin() {
+      // send to route id to store for unpinning
+      dispatch(unpinRoute(route.id));
+    }
+  ```
+  - Implemented dynamic History Navigation (`useNavigate(-1)`) in `ShipmentDetails.jsx` to allow user to go back to immediately visited page(`Shipment.jsx` or `Watchlist.jsx`) to maintain user's flow.[in place of `<Link>` tag.]
 
 
 ### Phase 4.1 : UI/UX Modification
-- instead of blocking, styleless native browser `alert()` popups,
-  used non-blocking toast notifications via `react-toastify` library.
-  ```javascript
-  // alert('message')
-  toast.error('msg')
-  toast.success('msg')
-  toast.warning('msg')
-  toast.info('msg')
-  ```
-- instead of using `windows.confirm()` popup for `Delete Account`, used a customizable, `react-modal`.
-  ```javacript
-    confirmAlert({
-      title: 'Confirm Account Deletion',
-      message: 'Are you sure you want to permanently delete your corporate account? This action cannot be undone.',
-      buttons: [
-        {
-          label: 'Yes, Delete It',
-          // 2. If they click yes, we run your EXACT asynchronous logic!
-          onClick: async () => {
-            // only for logged in user
-            if (user) {
-              try {
-                // Delete the user from the JSON database
-                
-                // Clear local storage
-                
-                // Show the success toast
-                toast.success(`Corporate Account deleted successfully. Sorry to see you go.`); 
+- 🔍 Concepts Used :
+  - instead of blocking, styleless native browser `alert()` popups,
+    used non-blocking toast notifications via `react-toastify` library.
+    ```javascript
+    // alert('message')
+    toast.error('msg')
+    toast.success('msg')
+    toast.warning('msg')
+    toast.info('msg')
+    ```
+  - instead of using `windows.confirm()` popup for `Delete Account`, used a customizable, `react-modal`.
+    ```javacript
+      confirmAlert({
+        title: 'Confirm Account Deletion',
+        message: 'Are you sure you want to permanently delete your corporate account? This action cannot be undone.',
+        buttons: [
+          {
+            label: 'Yes, Delete It',
+            // 2. If they click yes, we run your EXACT asynchronous logic!
+            onClick: async () => {
+              // only for logged in user
+              if (user) {
+                try {
+                  // Delete the user from the JSON database
+                  
+                  // Clear local storage
+                  
+                  // Show the success toast
+                  toast.success(`Corporate Account deleted successfully. Sorry to see you go.`); 
 
-                // Wait 2 seconds, then redirect and refresh
-                setTimeout(() => {
-                    navigate("/register");
-                    window.location.reload();
-                }, 2000);
+                  // Wait 2 seconds, then redirect and refresh
+                  setTimeout(() => {
+                      navigate("/register");
+                      window.location.reload();
+                  }, 2000);
 
-              } catch (error) {
-                toast.error("Couldn't delete the account.");
-                console.log("Error deleting account:", error);
+                } catch (error) {
+                  toast.error("Couldn't delete the account.");
+                  console.log("Error deleting account:", error);
+                }
               }
             }
+          },
+          {
+            label: 'Cancel',
+            // If they click cancel, the modal simply closes and does nothing.
+            onClick: () => {} 
           }
-        },
-        {
-          label: 'Cancel',
-          // If they click cancel, the modal simply closes and does nothing.
-          onClick: () => {} 
-        }
-      ]
-    });
-  ```
-- implemented `Oval` loading indicators to `Shipments` and `ShipmentDetails` pages to visually communicate background data fetching to the user, eliminating blank screens during load times.
+        ]
+      });
+    ```
+  - implemented `Oval` loading indicators to `Shipments` and `ShipmentDetails` pages to visually communicate background data fetching to the user, eliminating blank screens during load times.
 
-- in-place of O.S. dependant text emojis, used O.S. independant SVG icons via `react-icons` Library.
+  - in-place of O.S. dependant text emojis, used O.S. independant SVG icons via `react-icons` Library.
 
-- `Teaser UI` : Instead of completely hiding features from unauthenticated users, the app uses "Feature Discovery." Logged-out users see a teaser banner and greyed-out action buttons (indicating locked features) that trigger a prompt to create an account, to unlock the features.
+  - `Teaser UI` : Instead of completely hiding features from unauthenticated users, the app uses "Feature Discovery." Logged-out users see a teaser banner and greyed-out action buttons (indicating locked features) that trigger a prompt to create an account, to unlock the features.
+
+
+## Phase 5 : Search, Filter, Sort and Watchlist persistence and Project Deployment.
+- 🔍 Concepts Used :
+  - using `filter()` filtered the routes based on search and sort condtions
+  - saved `watchlist` data to `LocalStorage` for logged-in users for persistance of this data in case of page-reload and browser closing.
+  - deployed frontend using `Netlify` and backend on `Render`.
+
+### Phase 5.1 : Optimization of Performance : PAGINATION
+- 🔍 Concepts Used :
+  - applied frontend `Pagination` to ensure browser performance when rendering of multiple `RouteCard` in `Shipments` component.
+
+## 🚀 Want to run Locally ?
+If you wish to run this application locally, you will need two terminal windows running each for frontend and backend.
+
+**1. Clone the repository & install dependencies:**
+```bash
+git clone https://github.com/Sankalp-Yanamandra/Carbon-Tariff-Estimator.git
+cd your-repo-name
+npm install
+```
+
+**Start the Backend API(Terminal 1)**
+```bash
+# (ensure the baseURL in src/services/api.js is set to your localhost port rather than the production Render URL).
+npm start
+```
+
+**Start the Frontend Vite Server(Terminal 2)**
+```bash
+npm run dev
+```
