@@ -466,6 +466,34 @@ As a prototype designed to demonstrate understanding of front-end architecture, 
 3. **Static Variables & Emission Factors:** The current build uses static, hardcoded multipliers for emissions (e.g., Sea Freight = 0.015kg/km) and a static EU carbon price (€85). Real-world supply chain emissions require complex data models accounting for vessel type, fuel weight, and live carbon market fluctuations.
 4. **Third-Party API Rate Limiting:** The app utilizes OpenStreetMap's free Nominatim API for reverse geocoding. This public API has a strict rate limit of 1 request per second. In a production environment, this would need to be replaced with a paid enterprise service (like Mapbox or Google Maps Geocoding) to handle concurrent user traffic.
 
+## 🤝 Contributing Guidelines
+
+This project is entirely open-source and released under the MIT License. Contributions, issues, and feature requests are highly encouraged! 
+
+Whether you want to fix a known limitation, completely overhaul an existing component, or build out an entirely new feature (like migrating to a real maritime routing API or adding user authentication), your pull requests are welcome.
+
+### How to Contribute
+
+If you have an idea to improve this project, please follow these standard steps:
+
+1. **Fork the Project:** Click the "Fork" button at the top right of this repository to create your own copy.
+2. **Create your Feature Branch:** 
+```bash
+   git checkout -b feature/AmazingFeature
+  #  Or if you are fixing a bug: 
+  git checkout -b fix/RoutingBug
+```
+3. **Commit your Changes**: 
+```bash
+git commit -m 'Add some AmazingFeature'
+```
+4. **Push to the Branch:** 
+```bash
+git push origin feature/AmazingFeature
+```
+5. **Open a Pull Request:** Navigate back to the original repository and click "Compare & pull request."
+
+**Please ensure your code matches the existing style (React functional components, hooks, and clean CSS) and test your changes locally before submitting!**
 
 ## 🚀 Want to run Locally ?
 If you wish to run this application locally, you will need two terminal windows running each for frontend and backend.
@@ -495,3 +523,6 @@ npm run dev
 * **The Haversine Formula:** The mathematical foundation for our interactive map's distance calculations is based on the comprehensive spherical geodesy explanations provided by [Chris Veness (Movable Type Scripts)](https://www.movable-type.co.uk/scripts/latlong.html). It is the industry standard resource for calculating geographical distances in computer science.
 
 * **EU CBAM Tariffs:** The logic and definitions surrounding the Carbon Border Adjustment Mechanism (CBAM) and carbon leakage are sourced directly from the [Official European Commission Taxation and Customs Union](https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en).
+
+## 📜 License: 
+*This project is licensed under the MIT License - see the LICENSE file for details.*
