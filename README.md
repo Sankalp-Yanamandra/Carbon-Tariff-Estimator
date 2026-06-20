@@ -26,10 +26,14 @@ An full-stack React Application built to help e-commerce businesses to track glo
 </details>
 
 ### 🔗 Live Links
-* 🖥️ Frontend (Netlify): [Try it Out](https://tariff-estimator.netlify.app/)
 
-* ⚙️ Backend API (Render): [users](https://logistics-api-k0wx.onrender.com/users)
-[routes](https://logistics-api-k0wx.onrender.com/routes)
+<p align="center">
+  <a href="https://tariff-estimator.netlify.app">
+    <img src="https://img.shields.io/badge/Live_Demo-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" alt="Preview">
+  </a>
+</p>
+
+![Cover Page](src/assets/app.png)
 
 
 ## ✨ Core Features
@@ -40,15 +44,19 @@ An full-stack React Application built to help e-commerce businesses to track glo
 * **State Management:** Utilizes **Redux Toolkit** for complex global state architecture, seamlessly synced with browser `localStorage` for permanent Watchlist pinning across sessions.
 * **Security & Routing:** Implements strict Route Guarding (`ProtectedRoute`) and feature-discovery teardowns, ensuring unauthenticated users cannot access destructive actions or sensitive dashboards.
 * **Optimized Rendering:** Implements frontend pagination to ensure browser performance and stability when handling massive JSON data arrays.
+* **Interactive Route Simulator (Sandbox):** 
+Users can click anywhere on the global map to set Origin and Destination markers, then using `Haversine formula` the distance between both points calculated. 
+using `OpenStreetMap`'s `Nominatim` API, translates coordinates to human-readable Country/City `tooltips`.
+Instantly projects Co2 emissions and estimated CBAM tariffs based on mode of Transport and live distance calculated.
 
 <!-- Global Tech stack used -->
 ## 🛠️ Technical Architecture : 
 **Frontend:**
-- React-js via Vite
+- React-js via Vite : Single Page Application(SPA)
 - React-Router-DOM : for SPA navigation
 - Redux Toolkit : for global state management (avoid `prop drilling` )
 - React-Redux Library : connects React with Redux(toolkit)
-- react-toastify Library : alernatives `alert()` popups
+- react-toastify Library : alernative to `alert()` popups
 - react-confirm-alert  library : alernative to `windows.confirm()`.
 - react-loader-spinner library : `Oval` loading indicators.
 - react-icons Library : for Operating System independant SVG icons.
@@ -57,7 +65,9 @@ An full-stack React Application built to help e-commerce businesses to track glo
 - JSX
 - JS-ES6+
 - CSS (flex, grid)
-
+- Leaflet, React-Leaflet, OpenStreetMap Tiles : Maps & Visualization
+- Haversine Formula ( for sperical distance calculation between 2 points)
+- Nominatim API : get Location names by their coordinates
 **Backend:**
 - JSON-server
 - Node.js : (cloud hoisting for Node.js API environment)
@@ -378,6 +388,85 @@ An full-stack React Application built to help e-commerce businesses to track glo
 - 🔍 Concepts Used :
   - applied frontend `Pagination` to ensure browser performance when rendering of multiple `RouteCard` in `Shipments` component.
 
+## Interactive Route Simulator : **New Feature** 
+- added a feature of fully customizable interactive mapping feature that allows you to simulates shipment routes, without relying on any expensive/paid APIs(like Google Maps)
+- Tech-Stack :
+* **[Leaflet.js](https://leafletjs.com/):** The leading open-source JavaScript library for mobile-friendly interactive maps. It acts as the core "engine" that handles the math behind zooming, panning, and rendering the globe.
+* **[React-Leaflet](https://react-leaflet.js.org/):** A specialized wrapper that bridges the gap between imperative Leaflet code and declarative React code. It allows us to build complex maps using standard React components like `<MapContainer>`, `<TileLayer>`, and `<Marker>`.
+* **[OpenStreetMap (OSM)](https://www.openstreetmap.org/):** A collaborative, open-source project that creates and distributes free geographic data for the world. We use OSM's raster map tiles to visually draw the Earth.
+* **[Nominatim API](https://nominatim.openstreetmap.org/):** A search API built on top of OpenStreetMap data. We utilize this for **Reverse Geocoding**—instantly translating raw latitude and longitude numbers into human-readable City and Country names when a user clicks the map.
+
+- 🔍 Concepts Used :
+  - used `Haversine` formula to calculate the distance between 2 points on a curved surface.
+```javascript
+
+export function calculateDistance(lat1, lon1, lat2, lon2) {
+const R = 6371; // Radius of the Earth in kilometers
+const dLat = (lat2 - lat1) * (Math.PI / 180);
+const dLon = (lon2 - lon1) * (Math.PI / 180);
+
+
+const a = 
+  Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+  Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  
+
+const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+return R * c; // Final distance in km
+}
+```
+- used `useMapEvents` hook for listening to clicks by user on the map and assign coordinates to `origin` and `destination`.(`Reverse Geocoding`)
+```javascript
+// src/pages/Sandbox.jsx (Snippet)
+import { useMapEvents } from "react-leaflet";
+
+function ClickHandler({ setOrigin, setDestination, origin, destination }) {
+  useMapEvents({
+    click(clickevent) {
+      // If the map is empty, or already has a complete route, reset and drop Origin
+      if (!origin || (origin && destination)) {
+        setOrigin(clickevent.latlng);
+        setDestination(null);
+      } else {
+        // If Origin exists but no Destination, drop the Destination pin
+        setDestination(clickevent.latlng);
+      }
+    },
+  });
+  return null; 
+```
+- as soon as user clicks the map, based on the coordinates, `Nominatim` API translates to Country/City name.
+```javascript
+const fetchLocationName = async (lat, lng, setNameFunction) => {
+  setNameFunction("Locating..."); // UI loading state
+  
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+    );
+    const data = await response.json();
+
+    // fallbacks for messy global map data
+    const city = data.address.city || data.address.town || data.address.village || data.address.state || "Unknown Area";
+    const country = data.address.country || "Ocean/Unknown";
+
+    setNameFunction(`${city}, ${country}`);
+  } catch (error) {
+    setNameFunction("Unknown Location");
+  }
+};
+```
+## 🚧 Known Limitations & Future Roadmap
+
+As a prototype designed to demonstrate understanding of front-end architecture, this application takes certain calculated shortcuts. Contributors are welcome to help expand the following areas:
+
+1. **CBAM Geopolitical Logic:** Currently, the Sandbox simulator calculates projected tariffs for *any* route (e.g., USA to China). In reality, the EU CBAM regulation strictly applies only to imports entering the European Union from non-EU nations. 
+2. **The "Flying Ships" Phenomenon (Routing vs. Haversine):** The application uses the Haversine formula to calculate the absolute shortest "Great Circle" distance between two points. While mathematically accurate for airplanes, it does not account for real-world geography. A sea freight route from India to the UK currently draws a line straight through the landmass of Eastern Europe, rather than routing via Cape of Good-Hope or through the Suez Canal.
+3. **Static Variables & Emission Factors:** The current build uses static, hardcoded multipliers for emissions (e.g., Sea Freight = 0.015kg/km) and a static EU carbon price (€85). Real-world supply chain emissions require complex data models accounting for vessel type, fuel weight, and live carbon market fluctuations.
+4. **Third-Party API Rate Limiting:** The app utilizes OpenStreetMap's free Nominatim API for reverse geocoding. This public API has a strict rate limit of 1 request per second. In a production environment, this would need to be replaced with a paid enterprise service (like Mapbox or Google Maps Geocoding) to handle concurrent user traffic.
+
+
 ## 🚀 Want to run Locally ?
 If you wish to run this application locally, you will need two terminal windows running each for frontend and backend.
 
@@ -400,3 +489,9 @@ json-server --watch db.json
 ```bash
 npm run dev
 ```
+
+## 📚 References & Acknowledgements
+
+* **The Haversine Formula:** The mathematical foundation for our interactive map's distance calculations is based on the comprehensive spherical geodesy explanations provided by [Chris Veness (Movable Type Scripts)](https://www.movable-type.co.uk/scripts/latlong.html). It is the industry standard resource for calculating geographical distances in computer science.
+
+* **EU CBAM Tariffs:** The logic and definitions surrounding the Carbon Border Adjustment Mechanism (CBAM) and carbon leakage are sourced directly from the [Official European Commission Taxation and Customs Union](https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en).
